@@ -1,0 +1,62 @@
+{% extends "base/layout.twig.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/public/css/sticky-footer-navbar.css"/>
+<link rel="stylesheet" type="text/css" href="/public/css/custom.css"/>
+
+<!-- Content-Block wird überschrieben -->
+<h1 class="mt-5">User Eintritt erstellen</h1>
+<table>
+    <tr>
+        <td>Vorname</td>
+        <td><input type="text" name="vorname" value=""></td>
+    </tr>
+    <tr>
+        <td>Mittelname</td>
+        <td><input type="text" name="mittelname" value=""></td>
+    </tr>
+    <tr>
+        <td>Nachname</td>
+        <td><input type="text" name="nachname" value=""></td>
+    </tr>
+    <tr>
+        <td>Jobtitel</td>
+        <td><input type="text" name="jobtitel" value=""></td>
+    </tr>
+    <tr>
+        <td>Personalnummer</td>
+        <td><input type="text" name="personalnummer" value=""></td>
+    </tr>
+    <tr>
+        <td>Eintrittdatum</td>
+        <td><input type="text" name="eintrittdatum" value=""></td>
+    </tr>
+    <tr>
+        <td>Neuer Laptop</td>
+        <td><input type="checkbox" name="laptop" id="laptop" value="laptop"></td>
+    </tr>
+    <tr>
+        <td>Neues Handy</td>
+        <td><input type="checkbox" name="handy" id="handy" value="handy"></td>
+    </tr>
+    <tr>
+        <td>Neues Telefon</td>
+        <td><input type="checkbox" name="telefon" id="telefon" value="telefon"></td>
+    </tr>
+    <tr>
+        <td>Windows Login</td>
+        <td><input type="checkbox" name="winlogin" id="winlogin" value="winlogin"></td>
+    </tr>
+    <tr>
+        <td>SAP Login</td>
+        <td><input type="checkbox" name="saplogin" id="saplogin" value="saplogin"></td>
+    </tr>
+</table>
+<p class="lead">Bemerkung</p>
+<textarea cols="50" rows="10">Besonders wichtig ist …</textarea>
+<button class="button" type="submit">User Eintritt erstellen</button>
+  
+
+
+{% endblock %}

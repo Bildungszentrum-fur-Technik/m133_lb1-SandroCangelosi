@@ -1,0 +1,95 @@
+{% extends "base/layout.twig.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/public/css/sticky-footer-navbar.css"/>
+<link rel="stylesheet" type="text/css" href="/public/css/custom.css"/>
+
+<!-- Wir überschreiben den Content-Block -->
+<h1 class="mt-5">Eintritt abschliessen</h1>
+
+<table>
+    <tr>
+        <td>Vorname</td>
+        <td><input class="grau" readonly="readonly" type="text" name="vorname" value=""></td>
+    </tr>
+    <tr>
+        <td>Mittelname</td>
+        <td><input class="grau" readonly="readonly" type="text" name="mittelname" value=""></td>
+    </tr>
+    <tr>
+        <td>Nachname</td>
+        <td><input class="grau" readonly="readonly" type="text" name="nachname" value=""></td>
+    </tr>
+    <tr>
+        <td>Jobtitel</td>
+        <td><input class="grau" readonly="readonly" type="text" name="jobtitel" value=""></td>
+    </tr>
+    <tr>
+        <td>Personalnummer</td>
+        <td><input class="grau" readonly="readonly" type="text" name="personalnummer" value=""></td>
+    </tr>
+    <tr>
+        <td>Eintrittdatum</td>
+        <td><input class="grau" readonly="readonly" type="text" name="eintrittdatum" value=""></td>
+    </tr>
+    <tr>
+        <td>Neuer Laptop</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="laptop" id="laptop" value="laptop"></td>
+    </tr>
+    <tr>
+        <td>Neues Handy</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="handy" id="handy" value="handy"></td>
+    </tr>
+    <tr>
+        <td>Neues Telefon</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="telefon" id="telefon" value="telefon"></td>
+    </tr>
+    <tr>
+        <td>Windows Login</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="winlogin" id="winlogin" value="winlogin"></td>
+    </tr>
+    <tr>
+        <td>SAP Login</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="saplogin" id="saplogin" value="saplogin"></td>
+    </tr>
+</table>
+<p class="lead">Bemerkung HR</p>
+<textarea  class="grau" readonly="readonly" cols="50" rows="10">Besonders wichtig ist …</textarea>
+<table>
+    <tr>
+        <td>Neuer Laptop erledigt</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checklaptop" id="checklaptop" value="checklaptop"></td>
+    </tr>
+    <tr>
+        <td>Neues Handy erledigt</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checkhandy" id="checkhandy" value="checkhandy"></td>
+    </tr>
+    <tr>
+        <td>Neues Telefon erledigt</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checktelefon" id="checktelefon" value="checktelefon"></td>
+    </tr>
+    <tr>
+        <td>Windows Login erledigt</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checkwinlogin" id="checkwinlogin" value="checkwinlogin"></td>
+    </tr>
+    <tr>
+        <td>SAP Login erledigt</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checksaplogin" id="checksaplogin" value="checksaplogin"></td>
+    </tr>
+    <tr>
+        <td>Drucker erledigt</td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checkdrucker" id="checkdrucker" value="checkdrucker"></td>
+    </tr>
+</table>
+<p class="lead">Bemerkung IT</p>
+<textarea class="grau" readonly="readonly" cols="50" rows="10">Alles i.O.</textarea>
+<table>
+    <tr>
+        <td>Alles erledigt</td>
+        <td><input type="checkbox" name="alleserledigt" id="alleserledigt" value="alleserledigt"></td>
+    </tr>
+</table>    
+<button class="button" type="submit">Eintritt abschliessen</button>
+
+{% endblock %}
