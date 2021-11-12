@@ -1,0 +1,99 @@
+{% extends "base/layout.twig.html" %}
+
+{% block content %}
+
+<!-- Wir überschreiben den Content-Block -->
+<h1 class="mt-5">User Eintritte Liste </h1>
+
+<!-- {{ dump(data) }} -->
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Personalnummer</th>
+            <!--<th scope="col">Vorname</th>
+            <th scope="col">Nachname</th>
+            <th scope="col">Mittelname</th>
+            <th scope="col">Jobtitel</th>
+            <th scope="col">Eintrittdatum</th>
+            <th scope="col">Neuer Laptop</th>
+            <th scope="col">Neues Handy</th>
+            <th scope="col">Neues Telefon</th>
+            <th scope="col">Windows Account</th>
+            <th scope="col">SAP Account</th>
+            <th scope="col">Bemerkung HR</th>
+            <th scope="col">Neuer Laptop erledigt?</th>
+            <th scope="col">Neues Handy erledigt?</th>
+            <th scope="col">Neues Telefon erledigt?</th>
+            <th scope="col">Windows Account erledigt?</th>
+            <th scope="col">SAP Account erledigt?</th>
+            <th scope="col">Drucker eingetragen</th>
+            <th scope="col">Bemerkung IT</th>
+            <th scope="col">Eintritt abgeschlossen?</th>
+            -->
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for datarow in data %}
+        <tr>
+            <th scope="row">{{ datarow.personalnummer }}</th>
+            <!-- 
+            <td>{{ datarow.vorname }}</td>
+            <td>{{ datarow.nachname }}</td>
+            <td>{{ datarow.mittelname }}</td>
+            <td>{{ datarow.jobtitel }}</td>
+            <td>{{ datarow.eintrittdatum }}</td>
+            <td>{{ datarow.neuerlaptop }}</td>
+            <td>{{ datarow.neueshandy }}</td>
+            <td>{{ datarow.neuestelefon }}</td>
+            <td>{{ datarow.winuser }}</td>
+            <td>{{ datarow.sapuser }}</td>
+            <td>{{ datarow.bemerkungenhr }}</td>
+            <td>{{ datarow.checkneuerlaptop }}</td>
+            <td>{{ datarow.checkneueshandy }}</td>
+            <td>{{ datarow.checkneuestelefon }}</td>
+            <td>{{ datarow.checkactivedirectory }}</td>
+            <td>{{ datarow.checksap }}</td>
+            <td>{{ datarow.checkdrucker }}</td>
+            <td>{{ datarow.bemerkungenit }}</td>
+            <td>{{ datarow.alleserledigt }}</td> 
+            -->
+            <!--
+            {{ dump(data) }}
+            -->
+
+            <td> <!-- Hier wird der Status auf der GUI einfach angezeigt -- Könnte man auch über eine DB-Tabelle lösen -->
+                {% if datarow.status == 0 %}
+                    <p>Bestellt</p>
+                {% elseif datarow.status == 1 %}
+                    <p>Abholbereit</p>
+                {% elseif datarow.status == 2 %}
+                    <p>Abgeholt</p>
+                {% else %}
+                    <p>Undefined</p>
+                {% endif %}
+            </td>
+            <td>
+                <!-- Eine Form, die sich nur darum kümmert den Statuswechsel zu speichern-->
+                <form action="{{ urlroot }}/Ordersadmin/changeStatus" method="post">
+                <!--- Wir brauchen noch die OrderID als Hidden-Wert -->
+                <input type="hidden" value="{{ datarow.id }}" name="orderID">
+                <div class="form-group">
+                <!-- Hier wird der Status auf der GUI einfach angezeigt -- Könnte man auch über eine DB-Tabelle lösen -->
+                <select name="status">
+                    <option value="0">Bestellt</option>
+                    <option value="1">Abholbereit</option>
+                    <option value="2">Abgeholt</option>
+                </select>
+                <input type="submit" value="Status wechseln" class="btn btn-success btn-block">
+                </div>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}

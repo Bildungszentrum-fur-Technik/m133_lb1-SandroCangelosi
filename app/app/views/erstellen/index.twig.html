@@ -7,10 +7,18 @@
 
 <!-- Content-Block wird überschrieben -->
 <h1 class="mt-5">User Eintritt erstellen</h1>
+<form action="{{ urlroot }}/erstellen/index" method="post">
 <table>
     <tr>
         <td>Vorname</td>
-        <td><input type="text" name="vorname" value=""></td>
+        <td>
+            {% if data.vorname_error is empty %}
+            <input type="text" name="vorname" value="{{ data.vorname }}" class="">
+            {% else %}
+            <input type="text" name="vorname" value="{{ data.vorname }}" class="is-invalid">
+            <span class="invalid-feedback"> {{ data.vorname_error }}</span>
+            {% endif %}
+        </td>
     </tr>
     <tr>
         <td>Mittelname</td>
@@ -56,7 +64,7 @@
 <p class="lead">Bemerkung</p>
 <textarea cols="50" rows="10">Besonders wichtig ist …</textarea>
 <button class="button" type="submit">User Eintritt erstellen</button>
-  
+</form>
 
 
 {% endblock %}
