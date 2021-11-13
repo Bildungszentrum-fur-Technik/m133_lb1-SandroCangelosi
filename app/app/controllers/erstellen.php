@@ -24,7 +24,7 @@ class Erstellen extends Controller
             
             if(empty($data['vorname']))
             {
-                $data['vorname_error'] = 'Bitte einen gültigen Vornamen angeben';
+                $data['vorname_error'] = 'Bitte einen gültigen Vornamen eingeben';
             }
 
             // Keine Errors vorhanden

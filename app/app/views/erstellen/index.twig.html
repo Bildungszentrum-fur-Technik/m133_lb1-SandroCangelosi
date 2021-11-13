@@ -2,9 +2,6 @@
 
 {% block content %}
 
-<link rel="stylesheet" type="text/css" href="/public/css/sticky-footer-navbar.css"/>
-<link rel="stylesheet" type="text/css" href="/public/css/custom.css"/>
-
 <!-- Content-Block wird überschrieben -->
 <h1 class="mt-5">User Eintritt erstellen</h1>
 <form action="{{ urlroot }}/erstellen/index" method="post">
@@ -13,10 +10,11 @@
         <td>Vorname</td>
         <td>
             {% if data.vorname_error is empty %}
-            <input type="text" name="vorname" value="{{ data.vorname }}" class="">
+            <input type="text" name="vorname" value="{{ data.vorname }}">
             {% else %}
-            <input type="text" name="vorname" value="{{ data.vorname }}" class="is-invalid">
-            <span class="invalid-feedback"> {{ data.vorname_error }}</span>
+            <input type="text" name="vorname" value="{{ data.vorname }}" class="Fehlerbox">
+            <p class="Fehlertext">Falsch</p>
+                    <span class="invalid-feedback"> {{ data.username_err }}</span>
             {% endif %}
         </td>
     </tr>
@@ -65,6 +63,5 @@
 <textarea cols="50" rows="10">Besonders wichtig ist …</textarea>
 <button class="button" type="submit">User Eintritt erstellen</button>
 </form>
-
 
 {% endblock %}

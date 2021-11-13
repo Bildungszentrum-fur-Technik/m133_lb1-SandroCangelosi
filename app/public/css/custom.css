@@ -39,6 +39,8 @@ h1 {
     
 }
 
+
+
 td {
     padding: 10px 20px 10px 20px;
 }
@@ -91,4 +93,14 @@ textarea {
   .button:active {
     box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
     transform: translateY(5px);
+}
+
+.Fehlerbox{
+    padding-left: 2px;
+    border: solid red 3px;
+    
+}
+
+.Fehlertext{
+    color: red;
 }
