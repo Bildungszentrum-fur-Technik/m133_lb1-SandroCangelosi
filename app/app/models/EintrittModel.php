@@ -15,7 +15,6 @@ class EintrittModel extends BaseModel
     // HR
     private $personalnummer;
     private $vorname;
-    /* 
     private $nachname;
     private $mittelname;
     private $jobtitel;
@@ -38,7 +37,7 @@ class EintrittModel extends BaseModel
 
     // Vorgesetzter
     private $alleserledigt;
-    */
+    
 
     
     /**

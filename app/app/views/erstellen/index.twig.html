@@ -9,32 +9,76 @@
         <td>Vorname <sup>*</sup></td>
         <td>
             {% if data.vorname_error is empty %}
-            <input type="text" name="vorname" value="{{ data.vorname }}">
-            
-            {% else %}
-            <input type="text" name="vorname" value="{{ data.vorname }}" class="Fehlerbox">
-            <tr>
-                <td></td>
-                <td><p class="Fehlertext">{{ data.vorname_error }}</p></td>
-            </tr>
+                <input type="text" name="vorname" value="{{ data.vorname }}">
+                
+                {% else %}
+                <input type="text" name="vorname" value="{{ data.vorname }}" class="Fehlerbox">
+                <tr>
+                    <td></td>
+                    <td><p class="Fehlertext">{{ data.vorname_error }}</p></td>
+                </tr>
             {% endif %}
         </td>
     </tr>
     <tr>
         <td>Mittelname</td>
-        <td><input type="text" name="mittelname" value=""></td>
+        <td>
+            {% if data.mittelname_error is empty %}
+                <input type="text" name="mittelname" value="{{ data.mittelname }}">
+                
+                {% else %}
+                <input type="text" name="mittelname" value="{{ data.mittelname }}" class="Fehlerbox">
+                <tr>
+                    <td></td>
+                    <td><p class="Fehlertext">{{ data.mittelname_error }}</p></td>
+                </tr>
+            {% endif %}
+        </td>    
     </tr>
     <tr>
         <td>Nachname <sup>*</sup></td>
-        <td><input type="text" name="nachname" value=""></td>
+        <td>
+            {% if data.nachname_error is empty %}
+                <input type="text" name="nachname" value="{{ data.nachname }}">
+                
+                {% else %}
+                <input type="text" name="nachname" value="{{ data.nachname }}" class="Fehlerbox">
+                <tr>
+                    <td></td>
+                    <td><p class="Fehlertext">{{ data.nachname_error }}</p></td>
+                </tr>
+            {% endif %}
+        </td>
     </tr>
     <tr>
         <td>Jobtitel <sup>*</sup></td>
-        <td><input type="text" name="jobtitel" value=""></td>
+        <td>
+            {% if data.jobtitel_error is empty %}
+                <input type="text" name="jobtitel" value="{{ data.jobtitel }}">
+                
+                {% else %}
+                <input type="text" name="jobtitel" value="{{ data.jobtitel }}" class="Fehlerbox">
+                <tr>
+                    <td></td>
+                    <td><p class="Fehlertext">{{ data.jobtitel_error }}</p></td>
+                </tr>
+            {% endif %}
+        </td>
     </tr>
     <tr>
         <td>Personalnummer <sup>*</sup></td>
-        <td><input type="text" name="personalnummer" value=""></td>
+        <td>
+            {% if data.personalnummer_error is empty %}
+                <input type="text" name="personalnummer" value="{{ data.personalnummer }}">
+                
+                {% else %}
+                <input type="text" name="personalnummer" value="{{ data.personalnummer }}" class="Fehlerbox">
+                <tr>
+                    <td></td>
+                    <td><p class="Fehlertext">{{ data.personalnummer_error }}</p></td>
+                </tr>
+            {% endif %}
+        </td>
     </tr>
     <tr>
         <td>Eintrittdatum <sup>*</sup></td>
