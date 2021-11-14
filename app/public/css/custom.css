@@ -26,11 +26,34 @@ textarea {
 }
 
 table{
-    font-size: 23px;
+    font-size: 22px;
     font-family: Tahoma, sans-serif;
     border: 1px;
     margin: 0px 0px 50px 0px;
+    
 }
+
+.scrolltabelle{
+    width: 150%;
+    overflow-x: auto;
+    margin: 0px 0px 0px -300px;
+}
+
+.tableplatz{
+    margin: 0px 0px 0px 0px;
+    font-size: 14px;
+}
+
+.platzunten{
+    margin-bottom: 150px;
+}
+
+.tablevertline {
+    border-right: solid 1px #454d55; 
+}
+
+
+
 
 h1 {
     font-size: 60px;
@@ -103,4 +126,13 @@ textarea {
 
 .Fehlertext{
     color: red;
+    font-size: 19px;
+}
+
+.Pflichtfeld{
+    font-family: 'Arial'; 
+    font-size: 20px;
+    font-weight:600;
+    margin: 0px 0px 50px 0px;
+    
 }

@@ -22,9 +22,26 @@ class Erstellen extends Controller
             // Gucken ob die Daten plausibel sind
             // Da müsste man aber noch mehr machen
             
+            // * Überprüft, ob die Eingabe leer ist
             if(empty($data['vorname']))
             {
                 $data['vorname_error'] = 'Bitte einen gültigen Vornamen eingeben';
+            }
+
+            // * Überprüft, ob die Eingabe nur Buchstaben enhält
+            if(!ctype_alpha($data['vorname'])){
+                $data['vorname_error'] = 'Bitte einen gültigen Vornamen eingeben';
+            }
+
+            $vorname_laenge = strlen($data['vorname']);
+
+            // * Überprüfen, ob der Vorname kleiner als 3 ist
+            if($vorname_laenge < 3){
+                $data['vorname_error'] = 'Bitte einen längeren Vornamen eingeben';
+            }
+
+            if($vorname_laenge > 20){
+                $data['vorname_error'] = 'Bitte einen kürzeren Vornamen eingeben';
             }
 
             // Keine Errors vorhanden
@@ -41,8 +58,8 @@ class Erstellen extends Controller
                 // Fehler vorhanden - Fehler anzeigen
                 // View laden mit Fehlern
 
-                
-               echo $this->twig->render('erstellen/index.twig.html', ['title' => "POST Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data]);
+            
+               echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data] );
             }
 
         } else {
@@ -56,7 +73,7 @@ class Erstellen extends Controller
             
             
             
-            echo $this->twig->render('erstellen/index.twig.html', ['title' => "GET Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data]);
+            echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data]);
         }
 
         //echo $this->twig->render('erstellen/index.twig.html', ['title' => "User erstellen"] );                

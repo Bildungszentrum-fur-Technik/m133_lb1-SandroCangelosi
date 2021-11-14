@@ -14,7 +14,8 @@ class EintrittModel extends BaseModel
 
     // HR
     private $personalnummer;
-    /* private $vorname;
+    private $vorname;
+    /* 
     private $nachname;
     private $mittelname;
     private $jobtitel;
@@ -48,10 +49,10 @@ class EintrittModel extends BaseModel
     public function getFakeMenueDataArray()
     {
         $data = [
-            ['personalnummer' => '1']
-            // ['personalnummer' => '1', 'vorname' => 'Peter', 'nachname' => 'Weber', 'mittelname' => '', 'jobtitel' => 'Informatiker', 'eintrittdatum' => '01.01.1990', 'neuerlaptop' => true, 'neueshandy' => true, 'neuestelefon' => true, 'winuser' => true, 'sapuser' => true, 'bemerkungenhr' => 'Bitte schnell machen'],
-            // ['personalnummer' => '2', 'vorname' => 'Heinz', 'nachname' => 'Yung', 'mittelname' => 'Samuel', 'jobtitel' => 'Schneider', 'eintrittdatum' => '23.07.1995', 'neuerlaptop' => false, 'neueshandy' => true, 'neuestelefon' => false, 'winuser' => false, 'sapuser' => false, 'bemerkungenhr' => ''],
-            // ['personalnummer' => '3', 'vorname' => 'Gisela', 'nachname' => 'Deutsch', 'mittelname' => '', 'jobtitel' => 'Schreiner', 'eintrittdatum' => '13.02.2003', 'neuerlaptop' => false, 'neueshandy' => false, 'neuestelefon' => false, 'winuser' => false, 'sapuser' => false, 'bemerkungenhr' => 'Bitte schnell machen'],
+            ['personalnummer' => '1', 'vorname' => 'Max', 'nachname' => 'Muster', 'mittelname' => 'Heinz', 'jobtitel' => 'Informatiker', 'eintrittdatum' => '01.01.1990', 'neuerlaptop' => true, 'neueshandy' => true, 'neuestelefon' => true, 'winuser' => true, 'sapuser' => true, 'bemerkungenhr' => 'Bitte schnell machen, es ist dringend', 'checkneueshandy' => true, 'checkneuestelefon' => true, 'checkactivedirectory' => true, 'checksap' => true, 'checkdrucker' => true, 'bemerkungenit' => 'Alles perfekt erledigt', 'alleserledigt' => true, 'status' => '3'],
+            ['personalnummer' => '2', 'vorname' => 'Gustav', 'nachname' => 'Amtor', 'mittelname' => '', 'jobtitel' => 'Schreiner', 'eintrittdatum' => '23.09.2021', 'neuerlaptop' => true, 'neueshandy' => true, 'neuestelefon' => true, 'winuser' => true, 'sapuser' => true, 'bemerkungenhr' => 'Bitte schnell machen, es ist dringend', 'checkneueshandy' => false, 'checkneuestelefon' => false, 'checkactivedirectory' => false, 'checksap' => false, 'checkdrucker' => false, 'bemerkungenit' => '', 'alleserledigt' => false, 'status' => '2'],
+            ['personalnummer' => '3', 'vorname' => 'Peter', 'nachname' => 'Linch', 'mittelname' => '', 'jobtitel' => 'Mechaniker', 'eintrittdatum' => '19.12.2005', 'neuerlaptop' => false, 'neueshandy' => false, 'neuestelefon' => false, 'winuser' => false, 'sapuser' => false, 'bemerkungenhr' => '', 'checkneueshandy' => false, 'checkneuestelefon' => false, 'checkactivedirectory' => false, 'checksap' => false, 'checkdrucker' => false, 'bemerkungenit' => '', 'alleserledigt' => false, 'status' => '1'],
+
         ];
 
         return $data;

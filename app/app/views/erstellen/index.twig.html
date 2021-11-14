@@ -1,20 +1,22 @@
 {% extends "base/layout.twig.html" %}
 
 {% block content %}
-
 <!-- Content-Block wird überschrieben -->
 <h1 class="mt-5">User Eintritt erstellen</h1>
 <form action="{{ urlroot }}/erstellen/index" method="post">
 <table>
     <tr>
-        <td>Vorname</td>
+        <td>Vorname <sup>*</sup></td>
         <td>
             {% if data.vorname_error is empty %}
             <input type="text" name="vorname" value="{{ data.vorname }}">
+            
             {% else %}
             <input type="text" name="vorname" value="{{ data.vorname }}" class="Fehlerbox">
-            <p class="Fehlertext">Falsch</p>
-                    <span class="invalid-feedback"> {{ data.username_err }}</span>
+            <tr>
+                <td></td>
+                <td><p class="Fehlertext">{{ data.vorname_error }}</p></td>
+            </tr>
             {% endif %}
         </td>
     </tr>
@@ -23,19 +25,19 @@
         <td><input type="text" name="mittelname" value=""></td>
     </tr>
     <tr>
-        <td>Nachname</td>
+        <td>Nachname <sup>*</sup></td>
         <td><input type="text" name="nachname" value=""></td>
     </tr>
     <tr>
-        <td>Jobtitel</td>
+        <td>Jobtitel <sup>*</sup></td>
         <td><input type="text" name="jobtitel" value=""></td>
     </tr>
     <tr>
-        <td>Personalnummer</td>
+        <td>Personalnummer <sup>*</sup></td>
         <td><input type="text" name="personalnummer" value=""></td>
     </tr>
     <tr>
-        <td>Eintrittdatum</td>
+        <td>Eintrittdatum <sup>*</sup></td>
         <td><input type="text" name="eintrittdatum" value=""></td>
     </tr>
     <tr>
@@ -61,6 +63,7 @@
 </table>
 <p class="lead">Bemerkung</p>
 <textarea cols="50" rows="10">Besonders wichtig ist …</textarea>
+<p class="Pflichtfeld"><sup>*</sup> Sind Pflichtfelder und müssen ausgefüllt werden</p>
 <button class="button" type="submit">User Eintritt erstellen</button>
 </form>
 
