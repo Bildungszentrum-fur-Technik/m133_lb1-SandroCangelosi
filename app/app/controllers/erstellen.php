@@ -22,6 +22,21 @@ class Erstellen extends Controller
             $jobtitel = trim(
                 filter_input(INPUT_POST, 'jobtitel', FILTER_SANITIZE_STRING)
             );
+
+            $personalnummer = trim(
+                filter_input(INPUT_POST, 'personalnummer', FILTER_SANITIZE_STRING)
+            );
+
+            $eintrittdatum = trim(
+                filter_input(INPUT_POST, 'eintrittdatum', FILTER_SANITIZE_STRING)
+            );
+
+            $neuerlaptop = trim(
+                filter_input(INPUT_POST, 'neuerlaptop')
+            );
+
+            
+            
             
             // Daten setzen
             $data = [
@@ -35,6 +50,14 @@ class Erstellen extends Controller
                 'jobtitel_error' => '',         // Feldermeldung für Attribute
                 'personalnummer' => $personalnummer,  // Form-Feld-Daten
                 'personalnummer_error' => '',         // Feldermeldung für Attribute
+                'eintrittdatum' => $eintrittdatum,    // Form-Feld-Daten
+                'eintrittdatum_error' => '',          // Feldermeldung für Attribute
+                'neuerlaptop' => $neuerlaptop,        // Form-Feld-Daten
+                'neueshandy' => $neueshandy,          // Form-Feld-Daten
+                'neuestelefon' => $neuestelefon,      // Form-Feld-Daten
+                'winuser' => $winuser,                // Form-Feld-Daten
+                'sapuser' => $sapuser,                // Form-Feld-Daten
+                'bemerkungenhr' => $bemerkungenhr,    // Form-Feld-Daten
 
             ];
 
@@ -173,34 +196,55 @@ class Erstellen extends Controller
                 $data['personalnummer_error'] = 'Bitte eine gültige Personanummer eingeben';
             }
 
+
+
+
+
+
+            // * Personalnummer
             $EintrittModel = $this->model('EintrittModel');
-            $Arry_for_pnr = $EintrittModel->getFakeMenueDataArray();
-            
-            $test=1;
-            foreach ($Arry_for_pnr as &$list) {
-                if($list == 123){
-                    print_r($list);
-                }
-                
-                
+            $Array_for_pnr = $EintrittModel->getFakeMenueDataArray();
+
+
+
+
+
+            // * Überprüft, ob die Eingabe leer ist
+            if(empty($data['eintrittdatum']))
+            {
+                $data['eintrittdatum_error'] = 'Bitte einen gültiges Eintrittsdatum eingeben';
             }
 
 
+
+            
+
+
+
+
+
+
+
+
+
             // Keine Errors vorhanden
-            if (empty($data['vorname_error']) && empty($data['mittelname_error']) && empty($data['nachname_error']) && empty($data['jobtitel_error']) && empty($data['personalnummer_error']))
+            if (empty($data['vorname_error']) && empty($data['mittelname_error']) && empty($data['nachname_error']) && empty($data['jobtitel_error']) && empty($data['personalnummer_error'])  && empty($data['eintrittdatum_error']))
             {
                 // Alles gut, keine Fehler vorhanden
                 // Späteres TODO: Auf DB schreiben
-                
+                //print_r($strin_dec_array);
+
                 die(var_dump($data));
 
-                //die(var_dump($data));
             }
             else {
                 // Fehler vorhanden - Fehler anzeigen
                 // View laden mit Fehlern
 
-                die(var_dump($Arry_for_pnr));
+                //die(var_dump($dec_array));
+                //print_r($strin_dec_array);
+
+
                 echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data] );
             }
 
@@ -218,6 +262,14 @@ class Erstellen extends Controller
                 'jobtitel_error' => '',         // Feldermeldung für Attribute
                 'personalnummer' => $personalnummer,  // Form-Feld-Daten
                 'personalnummer_error' => '',         // Feldermeldung für Attribute
+                'eintrittdatum' => $eintrittdatum,    // Form-Feld-Daten
+                'eintrittdatum_error' => '',          // Feldermeldung für Attribute
+                'neuerlaptop' => $neuerlaptop,        // Form-Feld-Daten
+                'neueshandy' => $neueshandy,          // Form-Feld-Daten
+                'neuestelefon' => $neuestelefon,      // Form-Feld-Daten
+                'winuser' => $winuser,                // Form-Feld-Daten
+                'sapuser' => $sapuser,                // Form-Feld-Daten
+                'bemerkungenhr' => $bemerkungenhr,    // Form-Feld-Daten
             ];
             
             

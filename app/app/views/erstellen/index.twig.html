@@ -82,27 +82,38 @@
     </tr>
     <tr>
         <td>Eintrittdatum <sup>*</sup></td>
-        <td><input type="text" name="eintrittdatum" value=""></td>
+        <td>
+            {% if data.eintrittdatum_error is empty %}
+                <input class="datumfeldgroesse" type="date" name="eintrittdatum" value="{{ data.eintrittdatum }}">  
+                
+                {% else %}
+                <input class="datumfeldgroesse Fehlerbox" type="date" name="eintrittdatum" value="{{ data.eintrittdatum }}">
+                <tr>
+                    <td></td>
+                    <td><p class="Fehlertext">{{ data.eintrittdatum_error }}</p></td>
+                </tr>
+            {% endif %}
+        </td>
     </tr>
     <tr>
         <td>Neuer Laptop</td>
-        <td><input type="checkbox" name="laptop" id="laptop" value="laptop"></td>
+        <td><input type="checkbox" name="neuerlaptop" id="neuerlaptop" value="{{ data.neuerlaptop }}"></td>
     </tr>
     <tr>
         <td>Neues Handy</td>
-        <td><input type="checkbox" name="handy" id="handy" value="handy"></td>
+        <td><input type="checkbox" name="handy" id="handy" value="{{ data.neueshandy }}"></td>
     </tr>
     <tr>
         <td>Neues Telefon</td>
-        <td><input type="checkbox" name="telefon" id="telefon" value="telefon"></td>
+        <td><input type="checkbox" name="telefon" id="telefon" value="{{ data.neuestelefon }}"></td>
     </tr>
     <tr>
         <td>Windows Login</td>
-        <td><input type="checkbox" name="winlogin" id="winlogin" value="winlogin"></td>
+        <td><input type="checkbox" name="winlogin" id="winlogin" value="{{ data.winuser }}"></td>
     </tr>
     <tr>
         <td>SAP Login</td>
-        <td><input type="checkbox" name="saplogin" id="saplogin" value="saplogin"></td>
+        <td><input type="checkbox" name="saplogin" id="saplogin" value="{{ data.saplogin }}"></td>
     </tr>
 </table>
 <p class="lead">Bemerkung</p>
