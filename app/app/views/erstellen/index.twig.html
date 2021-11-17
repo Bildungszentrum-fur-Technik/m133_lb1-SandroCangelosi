@@ -97,27 +97,27 @@
     </tr>
     <tr>
         <td>Neuer Laptop</td>
-        <td><input type="checkbox" name="neuerlaptop" id="neuerlaptop" value="{{ data.neuerlaptop }}"></td>
+        <td><input type="checkbox" name="neuerlaptop" id="neuerlaptop" value="true" {% if data.neuerlaptop == "true" %} checked {% endif %}></td>
     </tr>
     <tr>
         <td>Neues Handy</td>
-        <td><input type="checkbox" name="handy" id="handy" value="{{ data.neueshandy }}"></td>
+        <td><input type="checkbox" name="neueshandy" id="neueshandy" value="true" {% if data.neueshandy == "true" %} checked {% endif %} ></td>
     </tr>
     <tr>
         <td>Neues Telefon</td>
-        <td><input type="checkbox" name="telefon" id="telefon" value="{{ data.neuestelefon }}"></td>
+        <td><input type="checkbox" name="neuestelefon" id="neuestelefon" value="true" {% if data.neuestelefon == "true" %} checked {% endif %} ></td>
     </tr>
     <tr>
         <td>Windows Login</td>
-        <td><input type="checkbox" name="winlogin" id="winlogin" value="{{ data.winuser }}"></td>
+        <td><input type="checkbox" name="winuser" id="winuser" value="true" {% if data.winuser == "true" %} checked {% endif %} ></td>
     </tr>
     <tr>
         <td>SAP Login</td>
-        <td><input type="checkbox" name="saplogin" id="saplogin" value="{{ data.saplogin }}"></td>
+        <td><input type="checkbox" name="sapuser" id="sapuser" value="true" {% if data.sapuser == "true" %} checked {% endif %} ></td>
     </tr>
 </table>
 <p class="lead">Bemerkung</p>
-<textarea cols="50" rows="10">Besonders wichtig ist …</textarea>
+<textarea placeholder="Besonders wichtig ist ..." name="bemerkungenhr" id="bemerkungenhr" cols="50" rows="10">{% if data.bemerkungenhr %} {{data.bemerkungenhr}} {% endif %}</textarea>
 <p class="Pflichtfeld"><sup>*</sup> Sind Pflichtfelder und müssen ausgefüllt werden</p>
 <button class="button" type="submit">User Eintritt erstellen</button>
 </form>

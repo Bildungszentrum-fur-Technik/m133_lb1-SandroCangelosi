@@ -32,7 +32,27 @@ class Erstellen extends Controller
             );
 
             $neuerlaptop = trim(
-                filter_input(INPUT_POST, 'neuerlaptop')
+                filter_input(INPUT_POST, 'neuerlaptop', FILTER_UNSAFE_RAW)
+            );
+
+            $neueshandy = trim(
+                filter_input(INPUT_POST, 'neueshandy', FILTER_UNSAFE_RAW)
+            );
+
+            $neuestelefon = trim(
+                filter_input(INPUT_POST, 'neuestelefon', FILTER_UNSAFE_RAW)
+            );
+
+            $winuser = trim(
+                filter_input(INPUT_POST, 'winuser', FILTER_UNSAFE_RAW)
+            );
+
+            $sapuser = trim(
+                filter_input(INPUT_POST, 'sapuser', FILTER_UNSAFE_RAW)
+            );
+
+            $bemerkungenhr = trim(
+                filter_input(INPUT_POST, 'bemerkungenhr', FILTER_UNSAFE_RAW)
             );
 
             
