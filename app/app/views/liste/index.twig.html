@@ -140,7 +140,7 @@
                 </td>
                 <td>
                     {% if datarow.status >= 2 %}
-                        {% if datarow.checkactivedirectory == 1 and datarow.status >= 2 %}
+                        {% if datarow.checkwinuser == 1 and datarow.status >= 2 %}
                             <p>Ja</p> 
                         
                         {% else %}
@@ -151,7 +151,7 @@
                 </td>
                 <td>
                     {% if datarow.status >= 2 %}
-                        {% if datarow.checksap == 1 and datarow.status >= 2 %}
+                        {% if datarow.checksapuser == 1 and datarow.status >= 2 %}
                             <p>Ja</p> 
                         
                         {% else %}

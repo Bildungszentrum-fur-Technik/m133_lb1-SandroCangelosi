@@ -7,6 +7,16 @@ class Listevorgesetzter extends Controller
         $liste = $this->model('EintrittModel');
         $listearray = $liste->getFakeMenueDataArray();
         
-        echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $listearray]);
+        
+
+        if (isset($_POST['abschliessen'])) {
+
+            echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' ] );  
+
+        } else {
+
+            echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $listearray]);
+
+        }
     }
 }

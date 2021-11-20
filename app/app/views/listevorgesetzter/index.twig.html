@@ -3,16 +3,17 @@
 {% block content %}
 
 <!-- Wir überschreiben den Content-Block -->
-<h1 class="mt-5">User Eintritte Liste Vorgesetzter</h1>
-
+<h1 class="mt-5">Übersicht Eintritte Vorgesetzter</h1>
+<form action="{{ urlroot }}/abschliessen/index" method="post">
 <!-- {{ dump(data) }} -->
 <div class="scrolltabelle platzunten">
     <table class="table tableplatz">
         <thead class="thead-dark">
             
             <tr>
-                <th class="tablevertline" colspan="12">HR</th>
-                <th class="tablevertline" colspan="7">IT</th>
+                <th class="tablevertline" colspan="7">HR</th>
+                <th class="tablevertline" colspan="2">IT</th>
+                <th class="tablevertline" colspan="2">Vorgesetzter</th>
             </tr>
             <tr>
                 <th scope="col">Personalnummer</th>
@@ -21,19 +22,11 @@
                 <th scope="col">Nachname</th>
                 <th scope="col">Jobtitel</th>
                 <th scope="col">Eintrittdatum</th>
-                <th scope="col">Neuer Laptop</th>
-                <th scope="col">Neues Handy</th>
-                <th scope="col">Neues Telefon</th>
-                <th scope="col">Windows Account</th>
-                <th scope="col">SAP Account</th>
                 <th class="tablevertline" scope="col">Bemerkung HR</th>
-                <th scope="col">Neuer Laptop erledigt?</th>
-                <th scope="col">Neues Handy erledigt?</th>
-                <th scope="col">Neues Telefon erledigt?</th>
-                <th scope="col">Windows Account erledigt?</th>
-                <th scope="col">SAP Account erledigt?</th>
-                <th scope="col">Drucker eingetragen</th>
+                <th scope="col">Checkliste erledigt?</th>
                 <th class="tablevertline" scope="col">Bemerkung IT</th>
+                <th scope="col">Eintritt abschliessen</th>
+                <th scope="col">Eintritt löschen</th>
             </tr>
         </thead>
         <tbody>
@@ -46,134 +39,27 @@
                 <td>{{ datarow.nachname }}</td>
                 <td>{{ datarow.jobtitel }}</td>
                 <td>{{ datarow.eintrittdatum }}</td>
-                <td>
-                    {% if datarow.status >= 1 %}
-                        {% if datarow.neuerlaptop == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 1 %}
-                        {% if datarow.neueshandy == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 1 %}
-                        {% if datarow.neuestelefon == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 1 %}
-                        {% if datarow.winuser == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 1 %}
-                        {% if datarow.sapuser == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                    
-                </td>
-                <td class="tablevertline" >{{ datarow.bemerkungenhr }}</td>
+                <td class="tablevertline2">{{ datarow.bemerkungenhr }}</td>
                 <td>
                     {% if datarow.status >= 2 %}
-                        {% if datarow.checkneuerlaptop == 1 and datarow.status >= 2 %}
                             <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
 
-                        {% endif %}
                     {% endif %}
                 </td>
-                <td>
-                    {% if datarow.status >= 2 %}
-                        {% if datarow.checkneueshandy == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 2 %}
-                        {% if datarow.checkneuestelefon == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 2 %}
-                        {% if datarow.checkactivedirectory == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 2 %}
-                        {% if datarow.checksap == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 2 %}
-                        {% if datarow.checkdrucker == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
-                    {% endif %}
-                </td>
-                <td >{{ datarow.bemerkungenit }}</td>
+                <td class="tablevertline2">{{ datarow.bemerkungenit }}</td>
+                {# Damit nur die User Aufgelistet werden, welche für den Vorgesetzten sind. Die anderen sind noch bei der IT #}
+                {% if datarow.status >= 2 %}            
+                    <td><button class="button platz2" name="abschliessen" type="submit">Eintritt abschliessen</button></td>
+                    <td><button class="button platz2" name="loeschen" type="submit">Eintritt löschen</button></td>
+                {% else%}
+                    {# Falls der User noch bei der IT, jedoch trotzdem die Linien angezeigt werden sollen #}
+                    <td></td>
+                    <td></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-
+</form>
 {% endblock %}

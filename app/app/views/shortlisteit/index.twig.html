@@ -1,0 +1,46 @@
+{% extends "base/layout.twig.html" %}
+
+{% block content %}
+
+<!-- Wir überschreiben den Content-Block -->
+<h1 class="mt-5">Übersicht Eintritte IT </h1>
+<form action="{{ urlroot }}/bearbeiten/index" method="post">
+<!-- {{ dump(data) }} -->
+<div class="scrolltabelle platzunten">
+    <table class="table tableplatz">
+        <thead class="thead-dark">
+            
+            <tr>
+                <th class="tablevertline" colspan="7">HR</th>
+                <th class="tablevertline" colspan="1">IT</th>
+            </tr>
+            <tr>
+                <th scope="col">Personalnummer</th>
+                <th scope="col">Mittelname</th>
+                <th scope="col">Vorname</th>
+                <th scope="col">Nachname</th>
+                <th scope="col">Jobtitel</th>
+                <th scope="col">Eintrittdatum</th>
+                <th class="tablevertline" scope="col">Bemerkung HR</th>
+                <th>Eintritt bearbeiten</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- * Daten einfügen, dazu die Ausgabe 1 zu Ja ersetzen-->
+            {% for datarow in data %}
+            <tr>
+                <th scope="row">{{ datarow.personalnummer }}</th>
+                <td>{{ datarow.vorname }}</td>
+                <td>{{ datarow.mittelname }}</td>
+                <td>{{ datarow.nachname }}</td>
+                <td>{{ datarow.jobtitel }}</td>
+                <td>{{ datarow.eintrittdatum }}</td>
+                <td class="tablevertline2">{{ datarow.bemerkungenhr }}</td>
+                <td><button class="button platz2" name="bearbeiten" type="submit">User bearbeiten</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</form>
+{% endblock %}

@@ -23,10 +23,6 @@ class Erstellen extends Controller
                 filter_input(INPUT_POST, 'jobtitel', FILTER_SANITIZE_STRING)
             );
 
-            $personalnummer = trim(
-                filter_input(INPUT_POST, 'personalnummer', FILTER_SANITIZE_STRING)
-            );
-
             $eintrittdatum = trim(
                 filter_input(INPUT_POST, 'eintrittdatum', FILTER_SANITIZE_STRING)
             );
@@ -68,8 +64,7 @@ class Erstellen extends Controller
                 'nachname_error' => '',         // Feldermeldung für Attribute
                 'jobtitel' => $jobtitel,        // Form-Feld-Daten
                 'jobtitel_error' => '',         // Feldermeldung für Attribute
-                'personalnummer' => $personalnummer,  // Form-Feld-Daten
-                'personalnummer_error' => '',         // Feldermeldung für Attribute
+                'personalnummer' => '',  // Form-Feld-Daten
                 'eintrittdatum' => $eintrittdatum,    // Form-Feld-Daten
                 'eintrittdatum_error' => '',          // Feldermeldung für Attribute
                 'neuerlaptop' => $neuerlaptop,        // Form-Feld-Daten
@@ -205,31 +200,6 @@ class Erstellen extends Controller
 
 
             // * Überprüft, ob die Eingabe leer ist
-            if(empty($data['personalnummer']))
-            {
-                $data['personalnummer_error'] = 'Bitte einen gültige Personalnummer eingeben';
-            }
-
-            // * Überprüft, ob die Eingabe der Personalnummer mit Zahlen von 0-9 befüllt wurde.
-            // * Dazu muss die Zahl positiv sein
-            if(!ctype_digit($data['personalnummer'])){
-                $data['personalnummer_error'] = 'Bitte eine gültige Personanummer eingeben';
-            }
-
-
-
-
-
-
-            // * Personalnummer
-            $EintrittModel = $this->model('EintrittModel');
-            $Array_for_pnr = $EintrittModel->getFakeMenueDataArray();
-
-
-
-
-
-            // * Überprüft, ob die Eingabe leer ist
             if(empty($data['eintrittdatum']))
             {
                 $data['eintrittdatum_error'] = 'Bitte einen gültiges Eintrittsdatum eingeben';
@@ -248,7 +218,7 @@ class Erstellen extends Controller
 
 
             // Keine Errors vorhanden
-            if (empty($data['vorname_error']) && empty($data['mittelname_error']) && empty($data['nachname_error']) && empty($data['jobtitel_error']) && empty($data['personalnummer_error'])  && empty($data['eintrittdatum_error']))
+            if (empty($data['vorname_error']) && empty($data['mittelname_error']) && empty($data['nachname_error']) && empty($data['jobtitel_error'])  && empty($data['eintrittdatum_error']))
             {
                 // Alles gut, keine Fehler vorhanden
                 // Späteres TODO: Auf DB schreiben
@@ -280,8 +250,7 @@ class Erstellen extends Controller
                 'nachname_error' => '',         // Feldermeldung für Attribute
                 'jobtitel' => $jobtitel,        // Form-Feld-Daten
                 'jobtitel_error' => '',         // Feldermeldung für Attribute
-                'personalnummer' => $personalnummer,  // Form-Feld-Daten
-                'personalnummer_error' => '',         // Feldermeldung für Attribute
+                'personalnummer' => ''      ,  // Form-Feld-Daten
                 'eintrittdatum' => $eintrittdatum,    // Form-Feld-Daten
                 'eintrittdatum_error' => '',          // Feldermeldung für Attribute
                 'neuerlaptop' => $neuerlaptop,        // Form-Feld-Daten

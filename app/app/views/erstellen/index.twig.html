@@ -66,21 +66,6 @@
         </td>
     </tr>
     <tr>
-        <td>Personalnummer <sup>*</sup></td>
-        <td>
-            {% if data.personalnummer_error is empty %}
-                <input type="text" name="personalnummer" value="{{ data.personalnummer }}">
-                
-                {% else %}
-                <input type="text" name="personalnummer" value="{{ data.personalnummer }}" class="Fehlerbox">
-                <tr>
-                    <td></td>
-                    <td><p class="Fehlertext">{{ data.personalnummer_error }}</p></td>
-                </tr>
-            {% endif %}
-        </td>
-    </tr>
-    <tr>
         <td>Eintrittdatum <sup>*</sup></td>
         <td>
             {% if data.eintrittdatum_error is empty %}
@@ -119,7 +104,7 @@
 <p class="lead">Bemerkung</p>
 <textarea placeholder="Besonders wichtig ist ..." name="bemerkungenhr" id="bemerkungenhr" cols="50" rows="10">{% if data.bemerkungenhr %} {{data.bemerkungenhr}} {% endif %}</textarea>
 <p class="Pflichtfeld"><sup>*</sup> Sind Pflichtfelder und müssen ausgefüllt werden</p>
-<button class="button" type="submit">User Eintritt erstellen</button>
+<button class="button platz" type="submit">User Eintritt erstellen</button>
 </form>
 
 {% endblock %}

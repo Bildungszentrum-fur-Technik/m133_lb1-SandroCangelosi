@@ -5,51 +5,51 @@
 
 <!-- Wir überschreiben den Content-Block -->
 <h1 class="mt-5">Eintritt abschliessen</h1>
-
+<form action="{{ urlroot }}/abschliessen/index" method="post">
 <table>
     <tr>
         <td>Vorname</td>
-        <td><input class="grau" readonly="readonly" type="text" name="vorname" value=""></td>
+        <td><input class="grau" readonly="readonly" type="text" name="vorname" value="{{ data.vorname }}"></td>
     </tr>
     <tr>
         <td>Mittelname</td>
-        <td><input class="grau" readonly="readonly" type="text" name="mittelname" value=""></td>
+        <td><input class="grau" readonly="readonly" type="text" name="mittelname" value="{{ data.mittelname }}"></td>
     </tr>
     <tr>
         <td>Nachname</td>
-        <td><input class="grau" readonly="readonly" type="text" name="nachname" value=""></td>
+        <td><input class="grau" readonly="readonly" type="text" name="nachname" value="{{ data.nachname }}"></td>
     </tr>
     <tr>
         <td>Jobtitel</td>
-        <td><input class="grau" readonly="readonly" type="text" name="jobtitel" value=""></td>
+        <td><input class="grau" readonly="readonly" type="text" name="jobtitel" value="{{ data.jobtitel }}"></td>
     </tr>
     <tr>
         <td>Personalnummer</td>
-        <td><input class="grau" readonly="readonly" type="text" name="personalnummer" value=""></td>
+        <td><input class="grau" readonly="readonly" type="text" name="personalnummer" value="{{ data.personalnummer}}"></td>
     </tr>
     <tr>
         <td>Eintrittdatum</td>
-        <td><input class="grau" readonly="readonly" type="text" name="eintrittdatum" value=""></td>
+        <td><input class="grau" readonly="readonly" type="text" name="eintrittdatum" value="{{ data.eintrittdatum }}"></td>
     </tr>
     <tr>
         <td>Neuer Laptop</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="laptop" id="laptop" value="laptop"></td>
+        <td><input type="checkbox" onclick="return false;" name="neuerlaptop" id="neuerlaptop" value="{{ data.neuerlaptop }}" {% if data.neuerlaptop == "true" %} checked {% endif %}></td>
     </tr>
     <tr>
         <td>Neues Handy</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="handy" id="handy" value="handy"></td>
+        <td><input type="checkbox" onclick="return false;" name="neueshandy" id="neueshandy" value="{{ data.neueshandy }}" {% if data.neueshandy == "true" %} checked {% endif %} ></td>
     </tr>
     <tr>
         <td>Neues Telefon</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="telefon" id="telefon" value="telefon"></td>
+        <td><input type="checkbox" onclick="return false;" name="neuestelefon" id="neuestelefon" value="{{ data.neuestelefon }}" {% if data.neuestelefon == "true" %} checked {% endif %} ></td>
     </tr>
     <tr>
         <td>Windows Login</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="winlogin" id="winlogin" value="winlogin"></td>
+        <td><input type="checkbox" onclick="return false;" name="winuser" id="winuser" value="{{ data.winuser }}" {% if data.winuser == "true" %} checked {% endif %} ></td>
     </tr>
     <tr>
         <td>SAP Login</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="saplogin" id="saplogin" value="saplogin"></td>
+        <td><input type="checkbox" onclick="return false;" name="sapuser" id="sapuser" value="{{ data.sapuser }}" {% if data.sapuser == "true" %} checked {% endif %} ></td>
     </tr>
 </table>
 <p class="lead">Bemerkung HR</p>
@@ -57,37 +57,31 @@
 <table>
     <tr>
         <td>Neuer Laptop erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checklaptop" id="checklaptop" value="checklaptop"></td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checkneuerlaptop" id="checkneuerlaptop" value="true" {% if data.checkneuerlaptop == "true" %} checked {% endif %}></td>
     </tr>
     <tr>
         <td>Neues Handy erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checkhandy" id="checkhandy" value="checkhandy"></td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checkneueshandy" id="checkneueshandy" value="true" {% if data.checkneueshandy == "true" %} checked {% endif %}></td>
     </tr>
     <tr>
         <td>Neues Telefon erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checktelefon" id="checktelefon" value="checktelefon"></td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checkneuestelefon" id="checkneuestelefon" value="true" {% if data.checkneuestelefon == "true" %} checked {% endif %}></td>
     </tr>
     <tr>
         <td>Windows Login erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checkwinlogin" id="checkwinlogin" value="checkwinlogin"></td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checkwinuser" id="checkwinuser" value="true" {% if data.checkwinuser == "true" %} checked {% endif %} ></td>
     </tr>
     <tr>
         <td>SAP Login erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checksaplogin" id="checksaplogin" value="checksaplogin"></td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checksapuser" id="checksapuser" value="true" {% if data.checksapuser == "true" %} checked {% endif %} ></td>
     </tr>
     <tr>
         <td>Drucker erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checkdrucker" id="checkdrucker" value="checkdrucker"></td>
+        <td><input class="grau" onclick="return false;" type="checkbox" name="checkdrucker" id="checkdrucker" value="checkdrucker" {% if data.checkdrucker == "true" %} checked {% endif %} ></td>
     </tr>
 </table>
 <p class="lead">Bemerkung IT</p>
-<textarea class="grau" readonly="readonly" cols="50" rows="10">Alles i.O.</textarea>
-<table>
-    <tr>
-        <td>Alles erledigt</td>
-        <td><input type="checkbox" name="alleserledigt" id="alleserledigt" value="alleserledigt"></td>
-    </tr>
-</table>    
-<button class="button" type="submit">Eintritt abschliessen</button>
-
+<textarea placeholder="Alles i.O." readonly="readonly" name="bemerkungenit" id="bemerkungenit" cols="50" rows="10">{% if data.bemerkungenit %} {{data.bemerkungenit}} {% endif %}</textarea>   
+<button class="button platz" name="abschliessen" type="submit">Eintritt abschliessen</button>
+</form>
 {% endblock %}
