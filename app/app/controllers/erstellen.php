@@ -244,21 +244,21 @@ class Erstellen extends Controller
             $data = [
                 'vorname' => '',       // Form-Feld-Daten
                 'vorname_error' => '',   // Feldermeldung für Attribute
-                'mittelname' => $mittelname,    // Form-Feld-Daten
+                'mittelname' => '',    // Form-Feld-Daten
                 'mittelname_error' => '',       // Feldermeldung für Attribute
-                'nachname' => $nachname,        // Form-Feld-Daten
+                'nachname' => '',        // Form-Feld-Daten
                 'nachname_error' => '',         // Feldermeldung für Attribute
-                'jobtitel' => $jobtitel,        // Form-Feld-Daten
+                'jobtitel' => '',        // Form-Feld-Daten
                 'jobtitel_error' => '',         // Feldermeldung für Attribute
                 'personalnummer' => ''      ,  // Form-Feld-Daten
-                'eintrittdatum' => $eintrittdatum,    // Form-Feld-Daten
+                'eintrittdatum' => '',    // Form-Feld-Daten
                 'eintrittdatum_error' => '',          // Feldermeldung für Attribute
-                'neuerlaptop' => $neuerlaptop,        // Form-Feld-Daten
-                'neueshandy' => $neueshandy,          // Form-Feld-Daten
-                'neuestelefon' => $neuestelefon,      // Form-Feld-Daten
-                'winuser' => $winuser,                // Form-Feld-Daten
-                'sapuser' => $sapuser,                // Form-Feld-Daten
-                'bemerkungenhr' => $bemerkungenhr,    // Form-Feld-Daten
+                'neuerlaptop' => '',        // Form-Feld-Daten
+                'neueshandy' => '',          // Form-Feld-Daten
+                'neuestelefon' => '',      // Form-Feld-Daten
+                'winuser' => '',                // Form-Feld-Daten
+                'sapuser' => '',                // Form-Feld-Daten
+                'bemerkungenhr' => '',    // Form-Feld-Daten
             ];
             
             

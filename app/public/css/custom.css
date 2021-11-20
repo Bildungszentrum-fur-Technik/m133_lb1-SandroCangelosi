@@ -105,6 +105,10 @@ textarea {
     -webkit-user-select: none;
     touch-action: manipulation;
   }
+
+  .buttonred{
+    background-color: red;
+  }
   
   .button:disabled {
     cursor: default;

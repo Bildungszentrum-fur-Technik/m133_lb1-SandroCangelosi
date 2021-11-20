@@ -50,7 +50,7 @@
                 {# Damit nur die User Aufgelistet werden, welche für den Vorgesetzten sind. Die anderen sind noch bei der IT #}
                 {% if datarow.status >= 2 %}            
                     <td><button class="button platz2" name="abschliessen" type="submit">Eintritt abschliessen</button></td>
-                    <td><button class="button platz2" name="loeschen" type="submit">Eintritt löschen</button></td>
+                    <td><button class="button platz2 buttonred" name="loeschen" type="submit">Eintritt löschen</button></td>
                 {% else%}
                     {# Falls der User noch bei der IT, jedoch trotzdem die Linien angezeigt werden sollen #}
                     <td></td>

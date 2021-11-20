@@ -35,6 +35,13 @@ class Bearbeiten extends Controller
         );
 
 
+        $liste = $this->model('EintrittModel');
+        $listearray = $liste->getFakeSingleDataSet();
+
+
+
+        $data = $listearray;
+
         /*$data = [
             'checkneuerlaptop' => $checkneuerlaptop,    // Form-Feld-Daten
             'checkneueshandy' => $checkneueshandy,        // Form-Feld-Daten
@@ -45,19 +52,20 @@ class Bearbeiten extends Controller
             'bemerkungenit' => $bemerkungenit,    // Form-Feld-Daten
 
         ];*/
+        
         echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data] );    
         //die(var_dump($data));
 
         }else{
         
         $data = [
-            'checkneuerlaptop' => $checkneuerlaptop,    // Form-Feld-Daten
-            'checkneueshandy' => $checkneueshandy,        // Form-Feld-Daten
-            'checkneuestelefon' => $checkneuestelefon,          // Form-Feld-Daten
-            'checkwinuser' => $checkwinuser,      // Form-Feld-Daten
-            'checksapuser' => $checksapuser,                // Form-Feld-Daten
-            'checkdrucker' => $checkdrucker,                // Form-Feld-Daten
-            'bemerkungenit' => $bemerkungenit,    // Form-Feld-Daten
+            'checkneuerlaptop' => '',    // Form-Feld-Daten
+            'checkneueshandy' => '',        // Form-Feld-Daten
+            'checkneuestelefon' => '',          // Form-Feld-Daten
+            'checkwinuser' => '',      // Form-Feld-Daten
+            'checksapuser' => '',                // Form-Feld-Daten
+            'checkdrucker' => '',                // Form-Feld-Daten
+            'bemerkungenit' => '',    // Form-Feld-Daten
 
         ];           
 

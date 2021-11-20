@@ -10,8 +10,8 @@ class Listevorgesetzter extends Controller
         
 
         if (isset($_POST['abschliessen'])) {
-
-            echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' ] );  
+            
+            echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt abschliessen" ] );  
 
         } else {
 
