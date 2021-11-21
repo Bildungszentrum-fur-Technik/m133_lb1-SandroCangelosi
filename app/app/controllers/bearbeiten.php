@@ -4,103 +4,105 @@ class Bearbeiten extends Controller
 {
     public function index($name = '')
     {
+        // Wenn die Seite mit einem POST Request Aufgerufen wurde, wird die View gelanden.
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
-        $checkneuerlaptop = trim(
-            filter_input(INPUT_POST, 'checkneuerlaptop', FILTER_UNSAFE_RAW)
-        );
 
-        $checkneueshandy = trim(
-            filter_input(INPUT_POST, 'checkneueshandy', FILTER_UNSAFE_RAW)
-        );
+            // Die Eingabe der Checks wird eingelesen.
+            $checkneuerlaptop = trim(
+                filter_input(INPUT_POST, 'checkneuerlaptop', FILTER_UNSAFE_RAW)
+            );
 
-        $checkneuestelefon = trim(
-            filter_input(INPUT_POST, 'checkneuestelefon', FILTER_UNSAFE_RAW)
-        );
+            $checkneueshandy = trim(
+                filter_input(INPUT_POST, 'checkneueshandy', FILTER_UNSAFE_RAW)
+            );
 
-        $checkwinuser = trim(
-            filter_input(INPUT_POST, 'checkwinuser', FILTER_UNSAFE_RAW)
-        );
+            $checkneuestelefon = trim(
+                filter_input(INPUT_POST, 'checkneuestelefon', FILTER_UNSAFE_RAW)
+            );
 
-        $checksapuser = trim(
-            filter_input(INPUT_POST, 'checksapuser', FILTER_UNSAFE_RAW)
-        );
+            $checkwinuser = trim(
+                filter_input(INPUT_POST, 'checkwinuser', FILTER_UNSAFE_RAW)
+            );
 
-        $checkdrucker = trim(
-            filter_input(INPUT_POST, 'checkdrucker', FILTER_UNSAFE_RAW)
-        );
+            $checksapuser = trim(
+                filter_input(INPUT_POST, 'checksapuser', FILTER_UNSAFE_RAW)
+            );
 
-        $bemerkungenit = trim(
-            filter_input(INPUT_POST, 'bemerkungenit', FILTER_UNSAFE_RAW)
-        );
+            $checkdrucker = trim(
+                filter_input(INPUT_POST, 'checkdrucker', FILTER_UNSAFE_RAW)
+            );
+
+            $bemerkungenit = trim(
+                filter_input(INPUT_POST, 'bemerkungenit', FILTER_UNSAFE_RAW)
+            );
+
+            // Holt sich einen Fake Datensatz aus dem Model.
+            $liste = $this->model('EintrittModel');
+            $listearray = $liste->getFakeSingleDataSet();
+
+            // Kürzt den Array, damit die Daten ausgelesen werden können.
+            $listekurz = $listearray[0];
+
+            // Setzt lokale Variablen, aus dem gekürtzten Array oben.
+            $vorname = $listekurz['vorname'];
+            $mittelname = $listekurz['mittelname'];
+            $nachname = $listekurz['nachname'];
+            $jobtitel = $listekurz['jobtitel'];
+            $personalnummer = $listekurz['personalnummer'];
+            $eintrittdatum = $listekurz['eintrittdatum'];
+            $neuerlaptop = $listekurz['neuerlaptop'];
+            $neueshandy = $listekurz['neueshandy'];
+            $neuestelefon = $listekurz['neuestelefon'];
+            $winuser = $listekurz['winuser'];
+            $sapuser = $listekurz['sapuser'];
+            $bemerkungenhr = $listekurz['bemerkungenhr'];
+            $status = $listekurz['status'];
+
+            // Setzt die oberen lokalen Variablen in einen Array.
+            $data = [
+                'vorname' => $vorname,
+                'mittelname' => $mittelname,
+                'nachname' => $nachname,
+                'jobtitel' => $jobtitel,
+                'personalnummer' => $personalnummer,
+                'eintrittdatum' => $eintrittdatum,
+                'neuerlaptop' => $neuerlaptop,
+                'neueshandy' => $neueshandy,
+                'neuestelefon' => $neuestelefon,
+                'winuser' => $winuser,
+                'sapuser' => $sapuser,
+                'bemerkungenhr' => $bemerkungenhr,
+                'checkneuerlaptop' => $checkneuerlaptop,
+                'checkneueshandy' => $checkneueshandy,
+                'checkneuestelefon' => $checkneuestelefon,
+                'checkwinuser' => $checkwinuser,
+                'checksapuser' => $checksapuser,
+                'checkdrucker' => $checkdrucker,
+                'bemerkungenit' => $bemerkungenit,
+                'status' => $status,
+            ];
 
 
-        $liste = $this->model('EintrittModel');
-        $listearray = $liste->getFakeSingleDataSet();
+            // Wenn der Button "bemerkungenit" gedrückt wird wird der Datensazu "data" angezeigt.
+            if (isset($_POST['bemerkungenit'])) {
 
-        $listekurz = $listearray[0];
+                // Zeigt den Datensatz an
+                die(var_dump($data));
+            } else {
 
-        $vorname = $listekurz['vorname'];
-        $mittelname = $listekurz['mittelname'];
-        $nachname = $listekurz['nachname'];
-        $jobtitel = $listekurz['jobtitel'];
-        $personalnummer = $listekurz['personalnummer'];
-        $eintrittdatum = $listekurz['eintrittdatum'];
-        $neuerlaptop = $listekurz['neuerlaptop'];
-        $neueshandy = $listekurz['neueshandy'];
-        $neuestelefon = $listekurz['neuestelefon'];
-        $winuser = $listekurz['winuser'];
-        $sapuser = $listekurz['sapuser'];
-        $bemerkungenhr = $listekurz['bemerkungenhr'];
-        $status = $listekurz['status'];
+                // Zeigt die View "bearbeiten" an, mit dem Seitentitel "Eintritts Checkliste bearbeiten".
+                echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
+            }
 
-
-        $data = [
-            'vorname' => $vorname,          // Form-Feld-Daten
-            'mittelname' => $mittelname,    // Form-Feld-Daten
-            'nachname' => $nachname,        // Form-Feld-Daten
-            'jobtitel' => $jobtitel,        // Form-Feld-Daten
-            'personalnummer' => $personalnummer,  // Form-Feld-Daten
-            'eintrittdatum' => $eintrittdatum,    // Form-Feld-Daten
-            'neuerlaptop' => $neuerlaptop,        // Form-Feld-Daten
-            'neueshandy' => $neueshandy,          // Form-Feld-Daten
-            'neuestelefon' => $neuestelefon,      // Form-Feld-Daten
-            'winuser' => $winuser,                // Form-Feld-Daten
-            'sapuser' => $sapuser,                // Form-Feld-Daten
-            'bemerkungenhr' => $bemerkungenhr,    // Form-Feld-Daten
-            'status' => $status,    // Form-Feld-Daten
-
-        ];
-
-
-
-
-
-        if (isset($_POST['bemerkungenit'])) {
-
-            die(var_dump($data));
-
+            // Fall der Webseitenaufruf eine GET Request wäre, dann würde der untere Code ausgeführt werden.
         } else {
 
-            echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data] );   
+            // Holt sich die Liste mit den Personen aus dem Model "EintrittModel".
+            $liste = $this->model('EintrittModel');
+            $data = $liste->getFakePersonList();
 
-        }
-
-
-
-
-        
-         
-        //die(var_dump($data));
-
-        }else{
-        
-       // Aufruf per URL
-       $liste = $this->model('EintrittModel');
-       $data = $liste->getFakeMenueDataArray();
-
-        echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $data] );    
-
+            // Rendert die View "listeit" mit einem Webseitentitel. Mit den Fake Daten "data".
+            echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
         }
     }
 }

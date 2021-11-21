@@ -4,21 +4,17 @@ class Abschliessen extends Controller
 {
     public function index($name = '')
     {
+        // Falls der Aufruf auf die Webseite einen POST Request wäre, würde der untere Code ausgeführt werden.
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            /*$alleserledigt = trim(
-                filter_input(INPUT_POST, 'alleserledigt', FILTER_UNSAFE_RAW)
-            );
-
-            $data = [
-                'alleserledigt' => $alleserledigt,    // Form-Feld-Daten
-            ];*/
-
+            // Holt sich einen einzelnen Datensatz aus dem Model "EintrittModel".
             $liste = $this->model('EintrittModel');
             $listearray = $liste->getFakeSingleDataSet();
 
+            // Kürtzt den oberen Datensatz, damit die Daten ausgelesen werden können.
             $listekurz = $listearray[0];
 
+            // Setzt lokale Variablen aus dem Model.
             $vorname = $listekurz['vorname'];
             $mittelname = $listekurz['mittelname'];
             $nachname = $listekurz['nachname'];
@@ -40,8 +36,8 @@ class Abschliessen extends Controller
             $bemerkungenit = $listekurz['bemerkungenit'];
             $alleserledigt = $listekurz['alleserledigt'];
             $status = $listekurz['status'];
-    
-    
+
+            // Speichert die lokalen Variablen in einen schön sortierten Array.
             $data = [
                 'vorname' => $vorname,
                 'nachname' => $nachname,
@@ -64,35 +60,32 @@ class Abschliessen extends Controller
                 'bemerkungenit' => $bemerkungenit,
                 'alleserledigt' => $alleserledigt,
                 'status' => $status,
-    
+
             ];
 
-            
+            // Falls der Button "fertigabschliessen" aus der View "abschliessen" gedrückt wird, würde der untere Code ausgeführt werden.
             if (isset($_POST['fertigabschliessen'])) {
 
+                // Setzt Alleserledigt auf "true" sowie den Status auf "3". 
+                // Das wird für die View gemacht, damit die Daten richtig angezeigt werden. Der EIntritt wird auf geschlossen gestellt.
                 $data['alleserledigt'] = 'true';
-                $data['status'] = '4';
-                die(var_dump($data));
-                
+                $data['status'] = '3';
 
+                // Zeigt den Datensatz an
+                die(var_dump($data));
             } else {
 
-                echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $data] ); 
-                
+                // Rendert die View "abschliessen" mit einem Seitentitel und den obenere Fake Daten.
+                echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $data]);
             }
+        } else {
 
-        }else{
-            /*
-            $data = [
-                'alleserledigt' => $alleserledigt,    // Form-Feld-Daten    
-            ];*/
-
+            // Die Personen Liste wird aus dem Model "EintrittModel" geholt, damit die Liste für den Vorgesetzten Daten enhält.
             $liste = $this->model('EintrittModel');
-            $data = $liste->getFakeMenueDataArray();
-            echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $data] ); 
+            $data = $liste->getFakePersonList();
 
-            
-        }         
-          
+            // Zeigt die Liste für den Vorgesetzten an (listevorgesetzter) mit Fake Daten und einem Webseitentitel.
+            echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $data]);
+        }
     }
 }

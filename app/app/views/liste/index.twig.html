@@ -1,18 +1,18 @@
 {% extends "base/layout.twig.html" %}
 
 {% block content %}
-
-<!-- Wir überschreiben den Content-Block -->
 <h1 class="mt-5">User Eintritte Liste </h1>
 <div class="scrolltabelle platzunten">
     <table class="table tableplatz">
         <thead class="thead-dark">
-            
+            <!-- Oberster Titel -->
             <tr>
                 <th class="tablevertline" colspan="12">HR</th>
                 <th class="tablevertline" colspan="7">IT</th>
                 <th class="tablevertline" colspan="1">Vorgesetzter</th>
+                <th class="tablevertline" colspan="1">Alle</th>
             </tr>
+            <!-- Titel zu den Attributen -->
             <tr>
                 <th scope="col">Personalnummer</th>
                 <th scope="col">Vorname</th>
@@ -33,11 +33,12 @@
                 <th scope="col">SAP Account erledigt?</th>
                 <th scope="col">Drucker eingetragen</th>
                 <th class="tablevertline" scope="col">Bemerkung IT</th>
-                <th scope="col">Eintritt abgeschlossen?</th>
+                <th class="tablevertline" scope="col">Eintritt abgeschlossen?</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
         <tbody>
-            <!-- * Daten einfügen, dazu die Ausgabe 1 zu Ja ersetzen-->
+            <!-- Die Übergebenen Daten einfügen, dazu wird die Ausgabe "1" zu "Ja" ersetzt-->
             {% for datarow in data %}
             <tr>
                 <th scope="row">{{ datarow.personalnummer }}</th>
@@ -48,139 +49,164 @@
                 <td>{{ datarow.eintrittdatum }}</td>
                 <td>
                     {% if datarow.status >= 1 %}
-                        {% if datarow.neuerlaptop == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.neuerlaptop == 1 and datarow.status >= 1 %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
                     {% endif %}
                 </td>
                 <td>
                     {% if datarow.status >= 1 %}
-                        {% if datarow.neueshandy == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.neueshandy == 1 and datarow.status >= 1 %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
                     {% endif %}
                 </td>
                 <td>
                     {% if datarow.status >= 1 %}
-                        {% if datarow.neuestelefon == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.neuestelefon == 1 and datarow.status >= 1 %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
                     {% endif %}
                 </td>
                 <td>
                     {% if datarow.status >= 1 %}
-                        {% if datarow.winuser == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.winuser == 1 and datarow.status >= 1 %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
                     {% endif %}
                 </td>
                 <td>
                     {% if datarow.status >= 1 %}
-                        {% if datarow.sapuser == 1 and datarow.status >= 1 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.sapuser == 1 and datarow.status >= 1 %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
                     {% endif %}
-                    
+                    {% endif %}
+
                 </td>
-                <td class="tablevertline" >{{ datarow.bemerkungenhr }}</td>
+                <td class="tablevertline2">{{ datarow.bemerkungenhr }}</td>
                 <td>
                     {% if datarow.status >= 2 %}
-                        {% if datarow.checkneuerlaptop == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.checkneuerlaptop == 1 and datarow.status >= 2
+                    %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
                     {% endif %}
-                </td>
-                <td>
-                    {% if datarow.status >= 2 %}
-                        {% if datarow.checkneueshandy == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
-
-                        {% endif %}
                     {% endif %}
                 </td>
                 <td>
                     {% if datarow.status >= 2 %}
-                        {% if datarow.checkneuestelefon == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.checkneueshandy == 1 and datarow.status >= 2
+                    %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
                     {% endif %}
                 </td>
                 <td>
                     {% if datarow.status >= 2 %}
-                        {% if datarow.checkwinuser == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.checkneuestelefon == 1 and datarow.status >= 2
+                    %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
                     {% endif %}
                 </td>
                 <td>
                     {% if datarow.status >= 2 %}
-                        {% if datarow.checksapuser == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.checkwinuser == 1 and datarow.status >= 2 %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
                     {% endif %}
                 </td>
                 <td>
                     {% if datarow.status >= 2 %}
-                        {% if datarow.checkdrucker == 1 and datarow.status >= 2 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.checksapuser == 1 and datarow.status >= 2 %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
                     {% endif %}
                 </td>
-                <td class="tablevertline" >{{ datarow.bemerkungenit }}</td>
                 <td>
+                    {% if datarow.status >= 2 %}
+                    {% if datarow.checkdrucker == 1 and datarow.status >= 2 %}
+                    <p>Ja</p>
+
+                    {% else %}
+                    <p>Nein</p>
+
+                    {% endif %}
+                    {% endif %}
+                </td>
+                <td class="tablevertline2">{{ datarow.bemerkungenit }}</td>
+                <td class="tablevertline2">
                     {% if datarow.status >= 3 %}
-                        {% if datarow.alleserledigt == 1 and datarow.status >= 3 %}
-                            <p>Ja</p> 
-                        
-                        {% else %}
-                            <p>Nein</p>
+                    {% if datarow.alleserledigt == 1 and datarow.status >= 3 %}
+                    <p>Ja</p>
 
-                        {% endif %}
+                    {% else %}
+                    <p>Nein</p>
+
                     {% endif %}
-                </td> 
+                    {% endif %}
+                </td>
+                {% if datarow.status == 1 %}
+                <td class="buttongelb">
+                    <button class="button2 platz2 buttongelb" type="submit">Offen
+                        bei der IT</button>
+                </td>
+                {% endif %}
+                {% if datarow.status == 2 %}
+                <td class="buttonorange">
+                    <button class="button2 platz2 buttonorange" type="submit">Offen
+                        beim Vorgesetzten</button>
+                </td>
+                {% endif %}
+                {% if datarow.status == 3 %}
+                <td class="buttongruen">
+                    <button class="button2 platz2 buttongruen" type="submit">Abgeschlossen</button>
+                </td>
+                {% endif %}
+                {% if datarow.status == 4 %}
+                <td class="buttonred">
+                    <button class="button2 platz2 buttonred" type="submit">Gelöscht</button>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

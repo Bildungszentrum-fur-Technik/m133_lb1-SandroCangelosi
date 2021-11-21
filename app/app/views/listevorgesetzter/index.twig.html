@@ -7,12 +7,13 @@
 <div class="scrolltabelle platzunten">
     <table class="table tableplatz">
         <thead class="thead-dark">
-            
+            <!-- Oberster Titel -->
             <tr>
                 <th class="tablevertline" colspan="7">HR</th>
                 <th class="tablevertline" colspan="2">IT</th>
                 <th class="tablevertline" colspan="2">Vorgesetzter</th>
             </tr>
+            <!-- Titel zu den Attributen -->
             <tr>
                 <th scope="col">Personalnummer</th>
                 <th scope="col">Vorname</th>
@@ -28,8 +29,9 @@
             </tr>
         </thead>
         <tbody>
-            <!-- * Daten einfügen, dazu die Ausgabe 1 zu Ja ersetzen-->
+            <!-- * Daten einfügen, dazu die beiden Buttons anzeigen-->
             {% for datarow in data %}
+            {% if datarow.status == 2 %}
             <tr>
                 <th scope="row">{{ datarow.personalnummer }}</th>
                 <td>{{ datarow.vorname }}</td>
@@ -40,25 +42,31 @@
                 <td class="tablevertline2">{{ datarow.bemerkungenhr }}</td>
                 <td>
                     {% if datarow.status >= 2 %}
-                            <p>Ja</p> 
+                    <p>Ja</p>
 
                     {% endif %}
                 </td>
                 <td class="tablevertline2">{{ datarow.bemerkungenit }}</td>
-                {# Damit nur die User Aufgelistet werden, welche für den Vorgesetzten sind. Die anderen sind noch bei der IT #}
-                {% if datarow.status >= 2 %}            
+                {# Damit nur die User Aufgelistet werden, welche für den
+                Vorgesetzten sind. Die anderen sind noch bei der IT #}
+                {% if datarow.status >= 2 %}
                 <form action="{{ urlroot }}/abschliessen/index" method="post">
-                    <td><button class="button platz2" name="abschliessen" type="submit">Eintritt abschliessen</button></td>
-                </form>    
-                <form action="{{ urlroot }}/listevorgesetzter/index" method="post">
-                    <td><button class="button platz2 buttonred" name="loeschen" type="submit">Eintritt löschen</button></td>
+                    <td><button class="button platz2" name="abschliessen"
+                            type="submit">Eintritt abschliessen</button></td>
+                </form>
+                <form action="{{ urlroot }}/listevorgesetzter/index"
+                    method="post">
+                    <td><button class="button platz2 buttonred" name="loeschen"
+                            type="submit">Eintritt löschen</button></td>
                 </form>
                 {% else%}
-                    {# Falls der User noch bei der IT, jedoch trotzdem die Linien angezeigt werden sollen #}
-                    <td></td>
-                    <td></td>
+                {# Falls der User noch bei der IT ist, jedoch trotzdem die
+                Linien angezeigt werden sollen #}
+                <td></td>
+                <td></td>
                 {% endif %}
             </tr>
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>

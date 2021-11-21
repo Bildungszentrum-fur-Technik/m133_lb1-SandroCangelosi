@@ -1,87 +1,125 @@
 {% extends "base/layout.twig.html" %}
 
 {% block content %}
-
-
-<!-- Wir überschreiben den Content-Block -->
 <h1 class="mt-5">Eintritt abschliessen</h1>
+<!-- Wichtig für den POST Aufruf -->
 <form action="{{ urlroot }}/abschliessen/index" method="post">
-<table>
-    <tr>
-        <td>Vorname</td>
-        <td><input class="grau" readonly="readonly" type="text" name="vorname" value="{{ data.vorname }}"></td>
-    </tr>
-    <tr>
-        <td>Mittelname</td>
-        <td><input class="grau" readonly="readonly" type="text" name="mittelname" value="{{ data.mittelname }}"></td>
-    </tr>
-    <tr>
-        <td>Nachname</td>
-        <td><input class="grau" readonly="readonly" type="text" name="nachname" value="{{ data.nachname }}"></td>
-    </tr>
-    <tr>
-        <td>Jobtitel</td>
-        <td><input class="grau" readonly="readonly" type="text" name="jobtitel" value="{{ data.jobtitel }}"></td>
-    </tr>
-    <tr>
-        <td>Personalnummer</td>
-        <td><input class="grau" readonly="readonly" type="text" name="personalnummer" value="{{ data.personalnummer}}"></td>
-    </tr>
-    <tr>
-        <td>Eintrittdatum</td>
-        <td><input class="grau" readonly="readonly" type="text" name="eintrittdatum" value="{{ data.eintrittdatum }}"></td>
-    </tr>
-    <tr>
-        <td>Neuer Laptop</td>
-        <td><input type="checkbox" onclick="return false;" name="neuerlaptop" id="neuerlaptop" value="{{ data.neuerlaptop }}" {% if data.neuerlaptop == "true" %} checked {% endif %}></td>
-    </tr>
-    <tr>
-        <td>Neues Handy</td>
-        <td><input type="checkbox" onclick="return false;" name="neueshandy" id="neueshandy" value="{{ data.neueshandy }}" {% if data.neueshandy == "true" %} checked {% endif %} ></td>
-    </tr>
-    <tr>
-        <td>Neues Telefon</td>
-        <td><input type="checkbox" onclick="return false;" name="neuestelefon" id="neuestelefon" value="{{ data.neuestelefon }}" {% if data.neuestelefon == "true" %} checked {% endif %} ></td>
-    </tr>
-    <tr>
-        <td>Windows Login</td>
-        <td><input type="checkbox" onclick="return false;" name="winuser" id="winuser" value="{{ data.winuser }}" {% if data.winuser == "true" %} checked {% endif %} ></td>
-    </tr>
-    <tr>
-        <td>SAP Login</td>
-        <td><input type="checkbox" onclick="return false;" name="sapuser" id="sapuser" value="{{ data.sapuser }}" {% if data.sapuser == "true" %} checked {% endif %} ></td>
-    </tr>
-</table>
-<p class="lead">Bemerkung HR</p>
-<textarea  class="grau" readonly="readonly" cols="50" rows="10">{% if data.bemerkungenhr %} {{data.bemerkungenhr}} {% endif %}</textarea>
-<table>
-    <tr>
-        <td>Neuer Laptop erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checkneuerlaptop" id="checkneuerlaptop" value="true" {% if data.checkneuerlaptop == "true" %} checked {% endif %}></td>
-    </tr>
-    <tr>
-        <td>Neues Handy erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checkneueshandy" id="checkneueshandy" value="true" {% if data.checkneueshandy == "true" %} checked {% endif %}></td>
-    </tr>
-    <tr>
-        <td>Neues Telefon erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checkneuestelefon" id="checkneuestelefon" value="true" {% if data.checkneuestelefon == "true" %} checked {% endif %}></td>
-    </tr>
-    <tr>
-        <td>Windows Login erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checkwinuser" id="checkwinuser" value="true" {% if data.checkwinuser == "true" %} checked {% endif %} ></td>
-    </tr>
-    <tr>
-        <td>SAP Login erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checksapuser" id="checksapuser" value="true" {% if data.checksapuser == "true" %} checked {% endif %} ></td>
-    </tr>
-    <tr>
-        <td>Drucker erledigt</td>
-        <td><input class="grau" onclick="return false;" type="checkbox" name="checkdrucker" id="checkdrucker" value="checkdrucker" {% if data.checkdrucker == "true" %} checked {% endif %} ></td>
-    </tr>
-</table>
-<p class="lead">Bemerkung IT</p>
-<textarea placeholder="Alles i.O." readonly="readonly" name="bemerkungenit" id="bemerkungenit" cols="50" rows="10">{% if data.bemerkungenit %} {{data.bemerkungenit}} {% endif %}</textarea>   
-<button class="button platz" name="fertigabschliessen" type="submit">Eintritt abschliessen</button>
+    <!-- Tabelle mit allen Eingabe Feldern, welche nicht verändert werden können. Die Daten werden aus dem "data" Array geladen -->
+    <table>
+        <tr>
+            <td>Vorname</td>
+            <td><input class="grau" readonly="readonly" type="text"
+                    name="vorname" value="{{ data.vorname }}"></td>
+        </tr>
+        <tr>
+            <td>Mittelname</td>
+            <td><input class="grau" readonly="readonly" type="text"
+                    name="mittelname" value="{{ data.mittelname }}"></td>
+        </tr>
+        <tr>
+            <td>Nachname</td>
+            <td><input class="grau" readonly="readonly" type="text"
+                    name="nachname" value="{{ data.nachname }}"></td>
+        </tr>
+        <tr>
+            <td>Jobtitel</td>
+            <td><input class="grau" readonly="readonly" type="text"
+                    name="jobtitel" value="{{ data.jobtitel }}"></td>
+        </tr>
+        <tr>
+            <td>Personalnummer</td>
+            <td><input class="grau" readonly="readonly" type="text"
+                    name="personalnummer" value="{{ data.personalnummer}}"></td>
+        </tr>
+        <tr>
+            <td>Eintrittdatum</td>
+            <td><input class="grau" readonly="readonly" type="text"
+                    name="eintrittdatum" value="{{ data.eintrittdatum }}"></td>
+        </tr>
+        <!-- Auch die Checkboxen sind nicht mehr veränderbar -->
+        <tr>
+            <td>Neuer Laptop</td>
+            <td><input type="checkbox" onclick="return false;"
+                    name="neuerlaptop" id="neuerlaptop" value="{{
+                    data.neuerlaptop }}" {% if data.neuerlaptop =="true" %}
+                    checked {% endif %}></td>
+        </tr>
+        <tr>
+            <td>Neues Handy</td>
+            <td><input type="checkbox" onclick="return false;" name="neueshandy"
+                    id="neueshandy" value="{{ data.neueshandy }}" {% if
+                    data.neueshandy =="true" %} checked {% endif %}></td>
+        </tr>
+        <tr>
+            <td>Neues Telefon</td>
+            <td><input type="checkbox" onclick="return false;"
+                    name="neuestelefon" id="neuestelefon" value="{{
+                    data.neuestelefon }}" {% if data.neuestelefon =="true" %}
+                    checked {% endif %}></td>
+        </tr>
+        <tr>
+            <td>Windows Login</td>
+            <td><input type="checkbox" onclick="return false;" name="winuser"
+                    id="winuser" value="{{ data.winuser }}" {% if data.winuser
+                    =="true" %} checked {% endif %}></td>
+        </tr>
+        <tr>
+            <td>SAP Login</td>
+            <td><input type="checkbox" onclick="return false;" name="sapuser"
+                    id="sapuser" value="{{ data.sapuser }}" {% if data.sapuser
+                    =="true" %} checked {% endif %}></td>
+        </tr>
+    </table>
+    <p class="lead">Bemerkung HR</p>
+    <!-- Textfeld für Bemerkungen von dem HR, welche auch nicht mehr veränderbar ist -->
+    <textarea class="grau" readonly="readonly" cols="50" rows="10">{% if
+        data.bemerkungenhr %} {{data.bemerkungenhr}} {% endif %}</textarea>
+    <!-- Checkboxen für die Checkliste der IT, welche auch nicht veränderbar ist-->
+    <table>
+        <tr>
+            <td>Neuer Laptop erledigt</td>
+            <td><input class="grau" onclick="return false;" type="checkbox"
+                    name="checkneuerlaptop" id="checkneuerlaptop" value="true"
+                    {% if data.checkneuerlaptop =="true" %} checked {% endif %}></td>
+        </tr>
+        <tr>
+            <td>Neues Handy erledigt</td>
+            <td><input class="grau" onclick="return false;" type="checkbox"
+                    name="checkneueshandy" id="checkneueshandy" value="true" {%
+                    if data.checkneueshandy =="true" %} checked {% endif %}></td>
+        </tr>
+        <tr>
+            <td>Neues Telefon erledigt</td>
+            <td><input class="grau" onclick="return false;" type="checkbox"
+                    name="checkneuestelefon" id="checkneuestelefon" value="true"
+                    {% if data.checkneuestelefon =="true" %} checked {% endif
+                    %}></td>
+        </tr>
+        <tr>
+            <td>Windows Login erledigt</td>
+            <td><input class="grau" onclick="return false;" type="checkbox"
+                    name="checkwinuser" id="checkwinuser" value="true" {% if
+                    data.checkwinuser =="true" %} checked {% endif %}></td>
+        </tr>
+        <tr>
+            <td>SAP Login erledigt</td>
+            <td><input class="grau" onclick="return false;" type="checkbox"
+                    name="checksapuser" id="checksapuser" value="true" {% if
+                    data.checksapuser =="true" %} checked {% endif %}></td>
+        </tr>
+        <tr>
+            <td>Drucker erledigt</td>
+            <td><input class="grau" onclick="return false;" type="checkbox"
+                    name="checkdrucker" id="checkdrucker" value="checkdrucker"
+                    {% if data.checkdrucker =="true" %} checked {% endif %}></td>
+        </tr>
+    </table>
+    <p class="lead">Bemerkung IT</p>
+    <!-- Textfeld für Bemerkungen von der IT, welche auch nicht mehr veränderbar ist -->
+    <textarea placeholder="Alles i.O." readonly="readonly" name="bemerkungenit"
+        id="bemerkungenit" cols="50" rows="10">{% if data.bemerkungenit %}
+        {{data.bemerkungenit}} {% endif %}</textarea>
+    <button class="button platz" name="fertigabschliessen" type="submit">Eintritt
+        abschliessen</button>
 </form>
 {% endblock %}

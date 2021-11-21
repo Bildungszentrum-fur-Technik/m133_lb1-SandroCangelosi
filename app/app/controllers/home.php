@@ -4,12 +4,8 @@ class Home extends Controller
 {
     public function index($name = '')
     {
-        /*
-        $user = $this->model('User');
-        $user->name = $name;
-        */
 
-        echo $this->twig->render('home/index.twig.html', ['title' => "Home / Index"] );                
-        //echo $this->twig->render('base/layout.twig.html', ['title' => "Titel Page"] );
+        // Wenn der "localhost:8000" aufgerufen wird, wird die View "home" mit dem Seitentitel "Home" angezeigt.
+        echo $this->twig->render('home/index.twig.html', ['title' => "Home"] );                
     }
 }

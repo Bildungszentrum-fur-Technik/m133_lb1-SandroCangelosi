@@ -4,19 +4,17 @@ class Listevorgesetzter extends Controller
 {
     public function index($name = '')
     {
+        // Holt sich vin dem EIntrittModel den einzelnen Datensatz. Wird unten für beide ifs verwendet.
+        $liste = $this->model('EintrittModel');
+        $listearray = $liste->getFakeSingleDataSet();
 
+        // Kürtzt den Array, damit die Werte ausgelesen werden können.
+        $listekurz = $listearray[0];
 
-
-
-
+        // Falls der Button mit dem Name "loeschen" von der View "listevorgesetzter" gedrückt wird, dann wird der untere Code ausgeführt.
         if (isset($_POST['loeschen'])) {
 
-
-            $liste = $this->model('EintrittModel');
-            $listearray = $liste->getFakeSingleDataSet();
-
-            $listekurz = $listearray[0];
-
+            // Aus dem "listekurz" Array werden die Variablen geholt und gespeichert.
             $vorname = $listekurz['vorname'];
             $mittelname = $listekurz['mittelname'];
             $nachname = $listekurz['nachname'];
@@ -30,35 +28,33 @@ class Listevorgesetzter extends Controller
             $sapuser = $listekurz['sapuser'];
             $bemerkungenhr = $listekurz['bemerkungenhr'];
 
-
+            // Die geholten Daten von oben werden hier in einen einzelnen Array verpackt. Die 4 im Status steht dafür, das der Eintritt gelöscht wird.
             $data = [
-                'vorname' => $vorname,          // Form-Feld-Daten
-                'mittelname' => $mittelname,    // Form-Feld-Daten
-                'nachname' => $nachname,        // Form-Feld-Daten
-                'jobtitel' => $jobtitel,        // Form-Feld-Daten
-                'personalnummer' => $personalnummer,  // Form-Feld-Daten
-                'eintrittdatum' => $eintrittdatum,    // Form-Feld-Daten
-                'neuerlaptop' => $neuerlaptop,        // Form-Feld-Daten
-                'neueshandy' => $neueshandy,          // Form-Feld-Daten
-                'neuestelefon' => $neuestelefon,      // Form-Feld-Daten
-                'winuser' => $winuser,                // Form-Feld-Daten
-                'sapuser' => $sapuser,                // Form-Feld-Daten
-                'bemerkungenhr' => $bemerkungenhr,    // Form-Feld-Daten
-                'status' => '5',    // Form-Feld-Daten
-
+                'vorname' => $vorname,
+                'mittelname' => $mittelname,
+                'nachname' => $nachname,
+                'jobtitel' => $jobtitel,
+                'personalnummer' => $personalnummer,
+                'eintrittdatum' => $eintrittdatum,
+                'neuerlaptop' => $neuerlaptop,
+                'neueshandy' => $neueshandy,
+                'neuestelefon' => $neuestelefon,
+                'winuser' => $winuser,
+                'sapuser' => $sapuser,
+                'bemerkungenhr' => $bemerkungenhr,
+                'status' => '4',
             ];
 
+            // Der Array von Oben wird hier mittel dump angezeigt. 
             die(var_dump($data));
-            
+
+            // Falls der Button "loeschen" nicht gedrückt wird, wird der Coder hier unten ausgeführt.    
         } else {
 
+            // Falls der Button "abschliessen" gedrückt wird, wird der Code hier unten ausgeführt.
             if (isset($_POST['abschliessen'])) {
 
-                $liste = $this->model('EintrittModel');
-                $listearray = $liste->getFakeSingleDataSet();
-
-                $listekurz = $listearray[0];
-
+                // Aus dem "listekurz" Array werden die Variablen geholt und gespeichert.
                 $vorname = $listekurz['vorname'];
                 $mittelname = $listekurz['mittelname'];
                 $nachname = $listekurz['nachname'];
@@ -71,15 +67,8 @@ class Listevorgesetzter extends Controller
                 $winuser = $listekurz['winuser'];
                 $sapuser = $listekurz['sapuser'];
                 $bemerkungenhr = $listekurz['bemerkungenhr'];
-                /*$checkneuerlaptop = $checkneuerlaptop['checkneuerlaptop'];
-                $checkneueshandy = $checkneueshandy['checkneueshandy'];
-                $checkneuestelefon = $checkneuestelefon['checkneuestelefon'];
-                $checkwinuser = $checkwinuser['checkwinuser'];
-                $checksapuser = $checksapuser['checksapuser'];
-                $checkdrucker = $checkdrucker['checkdrucker'];
-                $checkbemerkungenit = $checkbemerkungenit['checkbemerkungenit'];
-                $alleserledigt = $alleserledigt['alleserledigt'];
-                */
+
+                // Die geholten Daten von oben werden hier in einen einzelnen Array verpackt.
                 $data = [
                     'vorname' => $vorname,
                     'nachname' => $nachname,
@@ -93,24 +82,17 @@ class Listevorgesetzter extends Controller
                     'winuser' => $winuser,
                     'sapuser' => $sapuser,
                     'bemerkungenhr' => $bemerkungenhr,
-                    /*'checkneuerlaptop' => $checkneuerlaptop,
-                    'checkneueshandy' => $checkneueshandy,
-                    'checkneuestelefon' => $checkneuestelefon,
-                    'checkwinuser' => $checkwinuser,
-                    'checksapuser' => $checksapuser,
-                    'checkdrucker' => $checkdrucker,
-                    'bemerkungenit' => $checkbemerkungenit,
-                    'alleserledigt' => $alleserledigt,
-                    'status' => '3',*/
-
                 ];
 
+                // Rendert die View "abschliessen" mit dem Titel "Eintritt Liste Vorgesetzter". Der Datensatz von oben wird auch zum Anzeigen übergeben.
                 echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $data]);
             } else {
-                
-                $liste = $this->model('EintrittModel');
-                $listearray = $liste->getFakeMenueDataArray();
 
+                // Holt sich die Liste von den Fake Personen.
+                $liste = $this->model('EintrittModel');
+                $listearray = $liste->getFakePersonList();
+
+                // Rendert die Fake Personen auf die "listevorgesetzter" View.
                 echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $listearray]);
             }
         }
