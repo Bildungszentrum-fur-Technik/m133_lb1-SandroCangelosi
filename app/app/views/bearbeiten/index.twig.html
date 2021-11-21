@@ -5,7 +5,6 @@
 <!-- Wir überschreiben den Content-Block -->
 <h1 class="mt-5">Eintritt bearbeiten</h1>
 <form action="{{ urlroot }}/bearbeiten/index" method="post">
-{{ dump(data) }} 
 <table>
     <tr>
         <td>Vorname</td>
@@ -53,7 +52,7 @@
     </tr>
 </table>
 <p class="lead">Bemerkung HR</p>
-<textarea  class="grau" readonly="readonly" cols="50" rows="10">Besonders wichtig ist …</textarea>
+<textarea  class="grau" readonly="readonly" cols="50" rows="10">{% if data.bemerkungenhr %} {{data.bemerkungenhr}} {% endif %}</textarea>
 <table>
     <tr>
         <td>Neuer Laptop erledigt</td>
@@ -81,7 +80,7 @@
     </tr>
 </table>
 <p class="lead">Bemerkung IT</p>
-<textarea placeholder="Alles i.O." name="bemerkungenit" id="bemerkungenit" cols="50" rows="10">{% if data.bemerkungenit %} {{data.bemerkungenit}} {% endif %}</textarea>
+<textarea name="bemerkungenit" id="bemerkungenit" cols="50" rows="10">{% if data.bemerkungenit %} {{data.bemerkungenit}} {% endif %}</textarea>
 <button class="button platz" type="submit">Eintritt aktualisieren</button>
 </form>
 {% endblock %}

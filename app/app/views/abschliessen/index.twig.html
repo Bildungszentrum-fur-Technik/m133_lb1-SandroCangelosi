@@ -53,7 +53,7 @@
     </tr>
 </table>
 <p class="lead">Bemerkung HR</p>
-<textarea  class="grau" readonly="readonly" cols="50" rows="10">Besonders wichtig ist …</textarea>
+<textarea  class="grau" readonly="readonly" cols="50" rows="10">{% if data.bemerkungenhr %} {{data.bemerkungenhr}} {% endif %}</textarea>
 <table>
     <tr>
         <td>Neuer Laptop erledigt</td>
@@ -82,6 +82,6 @@
 </table>
 <p class="lead">Bemerkung IT</p>
 <textarea placeholder="Alles i.O." readonly="readonly" name="bemerkungenit" id="bemerkungenit" cols="50" rows="10">{% if data.bemerkungenit %} {{data.bemerkungenit}} {% endif %}</textarea>   
-<button class="button platz" name="abschliessen" type="submit">Eintritt abschliessen</button>
+<button class="button platz" name="fertigabschliessen" type="submit">Eintritt abschliessen</button>
 </form>
 {% endblock %}

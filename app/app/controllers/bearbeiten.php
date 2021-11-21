@@ -38,38 +38,68 @@ class Bearbeiten extends Controller
         $liste = $this->model('EintrittModel');
         $listearray = $liste->getFakeSingleDataSet();
 
+        $listekurz = $listearray[0];
+
+        $vorname = $listekurz['vorname'];
+        $mittelname = $listekurz['mittelname'];
+        $nachname = $listekurz['nachname'];
+        $jobtitel = $listekurz['jobtitel'];
+        $personalnummer = $listekurz['personalnummer'];
+        $eintrittdatum = $listekurz['eintrittdatum'];
+        $neuerlaptop = $listekurz['neuerlaptop'];
+        $neueshandy = $listekurz['neueshandy'];
+        $neuestelefon = $listekurz['neuestelefon'];
+        $winuser = $listekurz['winuser'];
+        $sapuser = $listekurz['sapuser'];
+        $bemerkungenhr = $listekurz['bemerkungenhr'];
+        $status = $listekurz['status'];
 
 
-        $data = $listearray;
+        $data = [
+            'vorname' => $vorname,          // Form-Feld-Daten
+            'mittelname' => $mittelname,    // Form-Feld-Daten
+            'nachname' => $nachname,        // Form-Feld-Daten
+            'jobtitel' => $jobtitel,        // Form-Feld-Daten
+            'personalnummer' => $personalnummer,  // Form-Feld-Daten
+            'eintrittdatum' => $eintrittdatum,    // Form-Feld-Daten
+            'neuerlaptop' => $neuerlaptop,        // Form-Feld-Daten
+            'neueshandy' => $neueshandy,          // Form-Feld-Daten
+            'neuestelefon' => $neuestelefon,      // Form-Feld-Daten
+            'winuser' => $winuser,                // Form-Feld-Daten
+            'sapuser' => $sapuser,                // Form-Feld-Daten
+            'bemerkungenhr' => $bemerkungenhr,    // Form-Feld-Daten
+            'status' => $status,    // Form-Feld-Daten
 
-        /*$data = [
-            'checkneuerlaptop' => $checkneuerlaptop,    // Form-Feld-Daten
-            'checkneueshandy' => $checkneueshandy,        // Form-Feld-Daten
-            'checkneuestelefon' => $checkneuestelefon,          // Form-Feld-Daten
-            'checkwinuser' => $checkwinuser,      // Form-Feld-Daten
-            'checksapuser' => $checksapuser,                // Form-Feld-Daten
-            'checkdrucker' => $checkdrucker,                // Form-Feld-Daten
-            'bemerkungenit' => $bemerkungenit,    // Form-Feld-Daten
+        ];
 
-        ];*/
+
+
+
+
+        if (isset($_POST['bemerkungenit'])) {
+
+            die(var_dump($data));
+
+        } else {
+
+            echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data] );   
+
+        }
+
+
+
+
         
-        echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data] );    
+         
         //die(var_dump($data));
 
         }else{
         
-        $data = [
-            'checkneuerlaptop' => '',    // Form-Feld-Daten
-            'checkneueshandy' => '',        // Form-Feld-Daten
-            'checkneuestelefon' => '',          // Form-Feld-Daten
-            'checkwinuser' => '',      // Form-Feld-Daten
-            'checksapuser' => '',                // Form-Feld-Daten
-            'checkdrucker' => '',                // Form-Feld-Daten
-            'bemerkungenit' => '',    // Form-Feld-Daten
+       // Aufruf per URL
+       $liste = $this->model('EintrittModel');
+       $data = $liste->getFakeMenueDataArray();
 
-        ];           
-
-        echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $data] );    
+        echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $data] );    
 
         }
     }

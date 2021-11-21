@@ -4,8 +4,6 @@
 
 <!-- Wir überschreiben den Content-Block -->
 <h1 class="mt-5">Übersicht Eintritte Vorgesetzter</h1>
-<form action="{{ urlroot }}/abschliessen/index" method="post">
-<!-- {{ dump(data) }} -->
 <div class="scrolltabelle platzunten">
     <table class="table tableplatz">
         <thead class="thead-dark">
@@ -49,8 +47,12 @@
                 <td class="tablevertline2">{{ datarow.bemerkungenit }}</td>
                 {# Damit nur die User Aufgelistet werden, welche für den Vorgesetzten sind. Die anderen sind noch bei der IT #}
                 {% if datarow.status >= 2 %}            
+                <form action="{{ urlroot }}/abschliessen/index" method="post">
                     <td><button class="button platz2" name="abschliessen" type="submit">Eintritt abschliessen</button></td>
+                </form>    
+                <form action="{{ urlroot }}/listevorgesetzter/index" method="post">
                     <td><button class="button platz2 buttonred" name="loeschen" type="submit">Eintritt löschen</button></td>
+                </form>
                 {% else%}
                     {# Falls der User noch bei der IT, jedoch trotzdem die Linien angezeigt werden sollen #}
                     <td></td>
@@ -61,5 +63,4 @@
         </tbody>
     </table>
 </div>
-</form>
 {% endblock %}
