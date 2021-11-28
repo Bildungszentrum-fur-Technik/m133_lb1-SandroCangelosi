@@ -38,7 +38,58 @@ class EintrittModel extends BaseModel
         return $results;
     }
 
-    public function DateninDBschreiben($data)
+    public function DateninDBschreibenUserEintritt($data)
+    {
+        $this->db->query("INSERT INTO usereintritt(vorname, mittelname, nachname, jobtitel, eintrittdatum, neuerlaptop, neueshandy, neuestelefon, winuser, sapuser, bemerkungenhr, eintrittstatus) 
+        VALUES (:vorname, :mittelname , :nachname, :jobtitel, :eintrittdatum, :neuerlaptop, :neueshandy, :neuestelefon, :winuser, :sapuser, :bemerkungenhr, :eintrittstatus)");
+        
+
+        // Standartwert von allen Boleans von Null auf 0 setzen. Wenn der Wert nicht auf 1 gesetzt ist. 
+        if($data['neuerlaptop'] == NULL){
+            $data['neuerlaptop'] = 0;
+        }
+
+        if($data['neueshandy'] == NULL){
+            $data['neueshandy'] = 0;
+        }
+
+        if($data['neuestelefon'] == NULL){
+            $data['neuestelefon'] = 0;
+        }
+
+        if($data['winuser'] == NULL){
+            $data['winuser'] = 0;
+        }
+
+        if($data['sapuser'] == NULL){
+            $data['sapuser'] = 0;
+        }
+        
+
+        $this->db->bind(':vorname',$data['vorname']);
+        $this->db->bind(':mittelname',$data['mittelname']);
+        $this->db->bind(':nachname',$data['nachname']);
+        $this->db->bind(':jobtitel',$data['jobtitel']);
+        $this->db->bind(':eintrittdatum',$data['eintrittdatum']);
+        $this->db->bind(':neuerlaptop',$data['neuerlaptop']);
+        $this->db->bind(':neueshandy',$data['neueshandy']);
+        $this->db->bind(':neuestelefon',$data['neuestelefon']);
+        $this->db->bind(':winuser',$data['winuser']);
+        $this->db->bind(':sapuser',$data['sapuser']);
+        $this->db->bind(':bemerkungenhr',$data['bemerkungenhr']);
+
+        $this->db->bind(':eintrittstatus',1); // Neuer Eintritt, Der Status wird immer automatisch auf 1 gesetzt
+
+        return $this->db->execute(); // Gibt True im Erfolgsfall, False im Fehlerfall
+    }
+
+
+
+
+    /*
+
+
+    public function DateninDBschreibenUserEintritt($data)
     {
         $this->db->query("INSERT INTO usereintritt(vorname, mittelname, nachname, jobtitel, eintrittdatum, neuerlaptop, neueshandy, neuestelefon, winuser, sapuser, bemerkungenhr, checkneuerlaptop, checkneueshandy, checkneuestelefon, checkwinuser, checksapuser, checkdrucker, bemerkungenit, alleserledigt, eintrittstatus) 
         VALUES (:vorname, :mittelname , :nachname, :jobtitel, :eintrittdatum, :neuerlaptop, :neueshandy, :neuestelefon, :winuser, :sapuser, :bemerkungenhr, :checkneuerlaptop, :checkneueshandy, :checkneuestelefon, :checkwinuser, :checksapuser, :checkdrucker, :bemerkungenit, :alleserledigt, :eintrittstatus)");
@@ -119,6 +170,9 @@ class EintrittModel extends BaseModel
 
         return $this->db->execute(); // Gibt True im Erfolgsfall, False im Fehlerfall
     }
+    */
+
+
 
 
     // Liste von Fake Pesonen

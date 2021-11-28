@@ -208,7 +208,7 @@ class Erstellen extends Controller
 
 
                 $EintrittModel = $this->model('EintrittModel');
-                if ($EintrittModel->DateninDBschreiben($data))
+                if ($EintrittModel->DateninDBschreibenUserEintritt($data))
                 {
                     // Erfolgsfall
                     // Umleiten auf Liste meiner Bestellungen
