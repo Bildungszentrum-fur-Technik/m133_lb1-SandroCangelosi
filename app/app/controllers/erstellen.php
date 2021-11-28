@@ -202,8 +202,32 @@ class Erstellen extends Controller
             // Falls die obere Validierung keine Errors verursacht hat, wird der untere Code ausgesührt.
             if (empty($data['vorname_error']) && empty($data['mittelname_error']) && empty($data['nachname_error']) && empty($data['jobtitel_error'])  && empty($data['eintrittdatum_error'])) {
 
+
+
+
+
+
+                $EintrittModel = $this->model('EintrittModel');
+                if ($EintrittModel->DateninDBschreiben($data))
+                {
+                    // Erfolgsfall
+                    // Umleiten auf Liste meiner Bestellungen
+                    redirect('home/index.twig.html');
+                } else 
+                {
+                    echo "Daten konnten nicht in die Datenbank geschrieben werden";
+                }
+
+
+
+
+
+
+
+
+
                 // Zeigt den Datensatz an
-                die(var_dump($data));
+                //die(var_dump($data));
             } else {
 
                 // Bei einem Fehler, wird die "erstellen" View nochmals gerendet. Durch das übergebene "data" werden die Fehlermeldungen angezeigt. Der Seitentitel wird natürlcih auch gesetzt.
