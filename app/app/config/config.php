@@ -2,9 +2,9 @@
 
 // DB-Params (die Werte sind im Docker-Compose definiert)
 define('DB_HOST', 'mysql');
-define('DB_USER', 'mensaUser');
-define('DB_PASS', 'userpass');
-define('DB_NAME', 'mensa');
+define('DB_USER', 'root');
+define('DB_PASS', 'root');
+define('DB_NAME', 'usereintritt');
 
 
 // Unsere APP-Root 
