@@ -48,8 +48,8 @@
                 <td>{{ datarow.jobtitel }}</td>
                 <td>{{ datarow.eintrittdatum }}</td>
                 <td>
-                    {% if datarow.status >= 1 %}
-                    {% if datarow.neuerlaptop == 1 and datarow.status >= 1 %}
+                    {% if datarow.eintrittstatus >= 1 %}
+                    {% if datarow.neuerlaptop == 1 and datarow.eintrittstatus >= 1 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -59,8 +59,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 1 %}
-                    {% if datarow.neueshandy == 1 and datarow.status >= 1 %}
+                    {% if datarow.eintrittstatus >= 1 %}
+                    {% if datarow.neueshandy == 1 and datarow.eintrittstatus >= 1 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -70,8 +70,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 1 %}
-                    {% if datarow.neuestelefon == 1 and datarow.status >= 1 %}
+                    {% if datarow.eintrittstatus >= 1 %}
+                    {% if datarow.neuestelefon == 1 and datarow.eintrittstatus >= 1 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -81,8 +81,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 1 %}
-                    {% if datarow.winuser == 1 and datarow.status >= 1 %}
+                    {% if datarow.eintrittstatus >= 1 %}
+                    {% if datarow.winuser == 1 and datarow.eintrittstatus >= 1 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -92,8 +92,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 1 %}
-                    {% if datarow.sapuser == 1 and datarow.status >= 1 %}
+                    {% if datarow.eintrittstatus >= 1 %}
+                    {% if datarow.sapuser == 1 and datarow.eintrittstatus >= 1 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -105,8 +105,8 @@
                 </td>
                 <td class="tablevertline2">{{ datarow.bemerkungenhr }}</td>
                 <td>
-                    {% if datarow.status >= 2 %}
-                    {% if datarow.checkneuerlaptop == 1 and datarow.status >= 2
+                    {% if datarow.eintrittstatus >= 2 %}
+                    {% if datarow.checkneuerlaptop == 1 and datarow.eintrittstatus >= 2
                     %}
                     <p>Ja</p>
 
@@ -117,8 +117,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 2 %}
-                    {% if datarow.checkneueshandy == 1 and datarow.status >= 2
+                    {% if datarow.eintrittstatus >= 2 %}
+                    {% if datarow.checkneueshandy == 1 and datarow.eintrittstatus >= 2
                     %}
                     <p>Ja</p>
 
@@ -129,8 +129,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 2 %}
-                    {% if datarow.checkneuestelefon == 1 and datarow.status >= 2
+                    {% if datarow.eintrittstatus >= 2 %}
+                    {% if datarow.checkneuestelefon == 1 and datarow.eintrittstatus >= 2
                     %}
                     <p>Ja</p>
 
@@ -141,8 +141,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 2 %}
-                    {% if datarow.checkwinuser == 1 and datarow.status >= 2 %}
+                    {% if datarow.eintrittstatus >= 2 %}
+                    {% if datarow.checkwinuser == 1 and datarow.eintrittstatus >= 2 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -152,8 +152,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 2 %}
-                    {% if datarow.checksapuser == 1 and datarow.status >= 2 %}
+                    {% if datarow.eintrittstatus >= 2 %}
+                    {% if datarow.checksapuser == 1 and datarow.eintrittstatus >= 2 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -163,8 +163,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if datarow.status >= 2 %}
-                    {% if datarow.checkdrucker == 1 and datarow.status >= 2 %}
+                    {% if datarow.eintrittstatus >= 2 %}
+                    {% if datarow.checkdrucker == 1 and datarow.eintrittstatus >= 2 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -175,8 +175,8 @@
                 </td>
                 <td class="tablevertline2">{{ datarow.bemerkungenit }}</td>
                 <td class="tablevertline2">
-                    {% if datarow.status >= 3 %}
-                    {% if datarow.alleserledigt == 1 and datarow.status >= 3 %}
+                    {% if datarow.eintrittstatus >= 3 %}
+                    {% if datarow.alleserledigt == 1 and datarow.eintrittstatus >= 3 %}
                     <p>Ja</p>
 
                     {% else %}
@@ -185,24 +185,24 @@
                     {% endif %}
                     {% endif %}
                 </td>
-                {% if datarow.status == 1 %}
+                {% if datarow.eintrittstatus == 1 %}
                 <td class="buttongelb">
                     <button class="button2 platz2 buttongelb" type="submit">Offen
                         bei der IT</button>
                 </td>
                 {% endif %}
-                {% if datarow.status == 2 %}
+                {% if datarow.eintrittstatus == 2 %}
                 <td class="buttonorange">
                     <button class="button2 platz2 buttonorange" type="submit">Offen
                         beim Vorgesetzten</button>
                 </td>
                 {% endif %}
-                {% if datarow.status == 3 %}
+                {% if datarow.eintrittstatus == 3 %}
                 <td class="buttongruen">
                     <button class="button2 platz2 buttongruen" type="submit">Abgeschlossen</button>
                 </td>
                 {% endif %}
-                {% if datarow.status == 4 %}
+                {% if datarow.eintrittstatus == 4 %}
                 <td class="buttonred">
                     <button class="button2 platz2 buttonred" type="submit">Gelöscht</button>
                 </td>

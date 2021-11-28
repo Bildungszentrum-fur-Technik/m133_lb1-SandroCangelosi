@@ -31,7 +31,7 @@
         <tbody>
             <!-- * Daten einfügen, dazu die beiden Buttons anzeigen-->
             {% for datarow in data %}
-            {% if datarow.status == 2 %}
+            {% if datarow.eintrittstatus == 2 %}
             <tr>
                 <th scope="row">{{ datarow.personalnummer }}</th>
                 <td>{{ datarow.vorname }}</td>
@@ -41,7 +41,7 @@
                 <td>{{ datarow.eintrittdatum }}</td>
                 <td class="tablevertline2">{{ datarow.bemerkungenhr }}</td>
                 <td>
-                    {% if datarow.status >= 2 %}
+                    {% if datarow.eintrittstatus >= 2 %}
                     <p>Ja</p>
 
                     {% endif %}
@@ -49,7 +49,7 @@
                 <td class="tablevertline2">{{ datarow.bemerkungenit }}</td>
                 {# Damit nur die User Aufgelistet werden, welche für den
                 Vorgesetzten sind. Die anderen sind noch bei der IT #}
-                {% if datarow.status >= 2 %}
+                {% if datarow.eintrittstatus >= 2 %}
                 <form action="{{ urlroot }}/abschliessen/index" method="post">
                     <td><button class="button platz2" name="abschliessen"
                             type="submit">Eintritt abschliessen</button></td>

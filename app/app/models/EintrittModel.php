@@ -2,7 +2,7 @@
 
 class EintrittModel extends BaseModel
 {
-
+    /*
     // HR
     private $personalnummer;
     private $vorname;
@@ -28,6 +28,16 @@ class EintrittModel extends BaseModel
 
     // Vorgesetzter
     private $alleserledigt;
+    */
+
+    public function getAdminList()
+    {
+        $this->db->query("SELECT * FROM usereintritt");
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
 
     // Liste von Fake Pesonen
     public function getFakePersonList()

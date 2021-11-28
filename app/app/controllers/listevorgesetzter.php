@@ -90,7 +90,7 @@ class Listevorgesetzter extends Controller
 
                 // Holt sich die Liste von den Fake Personen.
                 $liste = $this->model('EintrittModel');
-                $listearray = $liste->getFakePersonList();
+                $listearray = $liste->getAdminList();
 
                 // Rendert die Fake Personen auf die "listevorgesetzter" View.
                 echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $listearray]);

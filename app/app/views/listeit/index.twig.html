@@ -27,7 +27,7 @@
             <tbody>
                 <!-- Übergebene Daten einfügen-->
                 {% for datarow in data %}
-                {% if datarow.status == 1 %}
+                {% if datarow.eintrittstatus == 1 %}
                 <tr>
                     <th scope="row">{{ datarow.personalnummer }}</th>
                     <td>{{ datarow.vorname }}</td>

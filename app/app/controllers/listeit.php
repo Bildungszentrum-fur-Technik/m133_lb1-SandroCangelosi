@@ -6,7 +6,7 @@ class Listeit extends Controller
     {
         // Holt sich die Fake Personen Liste aus dem Model. Damit diese auf der Liste angezeigt werden können.
         $liste = $this->model('EintrittModel');
-        $listearray = $liste->getFakePersonList();
+        $listearray = $liste->getAdminList();
 
         // Wenn der Button "bearbeiten" geklickt wird, dann wird das if aktiviert.
         if (isset($_POST['bearbeiten'])) {
