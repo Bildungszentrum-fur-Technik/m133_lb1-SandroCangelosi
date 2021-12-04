@@ -37,7 +37,8 @@ class Bearbeiten extends Controller
             );
 
             // Holt sich einen Fake Datensatz aus dem Model.
-            $liste = $this->model('EintrittModel');
+            
+            /*$liste = $this->model('EintrittModel');
             $listearray = $liste->getFakeSingleDataSet();
 
             // Kürzt den Array, damit die Daten ausgelesen werden können.
@@ -57,52 +58,34 @@ class Bearbeiten extends Controller
             $sapuser = $listekurz['sapuser'];
             $bemerkungenhr = $listekurz['bemerkungenhr'];
             $status = $listekurz['status'];
+            */
 
-            // Setzt die oberen lokalen Variablen in einen Array.
-            $data = [
-                'vorname' => $vorname,
-                'mittelname' => $mittelname,
-                'nachname' => $nachname,
-                'jobtitel' => $jobtitel,
-                'personalnummer' => $personalnummer,
-                'eintrittdatum' => $eintrittdatum,
-                'neuerlaptop' => $neuerlaptop,
-                'neueshandy' => $neueshandy,
-                'neuestelefon' => $neuestelefon,
-                'winuser' => $winuser,
-                'sapuser' => $sapuser,
-                'bemerkungenhr' => $bemerkungenhr,
-                'checkneuerlaptop' => $checkneuerlaptop,
-                'checkneueshandy' => $checkneueshandy,
-                'checkneuestelefon' => $checkneuestelefon,
-                'checkwinuser' => $checkwinuser,
-                'checksapuser' => $checksapuser,
-                'checkdrucker' => $checkdrucker,
-                'bemerkungenit' => $bemerkungenit,
-                'status' => $status,
-            ];
-
-
+            $liste = $this->model('EintrittModel');
+            $data = $liste->getBearbeitenList();
+            
+            
+            
+            //die(var_dump($data));
             // Wenn der Button "bemerkungenit" gedrückt wird wird der Datensazu "data" angezeigt.
-            if (isset($_POST['bemerkungenit'])) {
+            /*if (isset($_POST['bemerkungenit'])) {
 
                 // Zeigt den Datensatz an
                 die(var_dump($data));
             } else {
 
                 // Zeigt die View "bearbeiten" an, mit dem Seitentitel "Eintritts Checkliste bearbeiten".
-                echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
-            }
-
+                
+            }*/
+            echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
             // Fall der Webseitenaufruf eine GET Request wäre, dann würde der untere Code ausgeführt werden.
         } else {
 
             // Holt sich die Liste mit den Personen aus dem Model "EintrittModel".
             $liste = $this->model('EintrittModel');
-            $data = $liste->getFakePersonList();
+            $listearray = $liste->getAdminList();
 
             // Rendert die View "listeit" mit einem Webseitentitel. Mit den Fake Daten "data".
-            echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
+            echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $listearray]);
         }
     }
 }

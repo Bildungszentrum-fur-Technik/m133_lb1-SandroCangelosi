@@ -3,7 +3,7 @@
 {% block content %}
 <h1 class="mt-5">Übersicht Eintritte IT </h1>
 <!-- Wichtig für den POST Aufruf -->
-<form action="{{ urlroot }}/bearbeiten/index" method="post">
+<form action="{{ urlroot }}/listeit/index" method="post">
     <div class="scrolltabelle platzunten">
         <table class="table tableplatz">
             <thead class="thead-dark">
@@ -37,7 +37,7 @@
                     <td>{{ datarow.eintrittdatum }}</td>
                     <td class="tablevertline2">{{ datarow.bemerkungenhr }}</td>
                     <td><button class="button platz2" name="bearbeiten"
-                            type="submit">User bearbeiten</button></td>
+                            type="submit" value="{{ datarow.personalnummer }}">User bearbeiten</button></td>
                 </tr>
                 {% endif %}
                 {% endfor %}
