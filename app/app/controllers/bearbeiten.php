@@ -76,7 +76,29 @@ class Bearbeiten extends Controller
                 // Zeigt die View "bearbeiten" an, mit dem Seitentitel "Eintritts Checkliste bearbeiten".
                 
             }*/
-            echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
+
+            if (isset($_POST['aktualisieren'])){
+
+                $uebgergebenepersonalnummer = $_POST['aktualisieren'];
+                
+                $errormessage = $liste->getUpdateDBchecks($uebgergebenepersonalnummer, $checkneuerlaptop, $checkneueshandy, $checkneuestelefon, $checkwinuser, $checksapuser, $checkdrucker, $bemerkungenit);
+                
+                $data = $liste->getBearbeitenList();
+                
+                
+                if($errormessage == NULL){
+
+                    echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
+                }else{
+                    die(var_dump($errormessage));
+                }
+                
+            }else{
+                echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
+            }
+
+
+            
             // Fall der Webseitenaufruf eine GET Request wäre, dann würde der untere Code ausgeführt werden.
         } else {
 

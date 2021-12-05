@@ -9,10 +9,16 @@ class Abschliessen extends Controller
 
             // Holt sich einen einzelnen Datensatz aus dem Model "EintrittModel".
             $liste = $this->model('EintrittModel');
-            $listearray = $liste->getFakeSingleDataSet();
+            $listearray = $liste->getVorgesetzterList();
 
+            $uebgergebenepersonalnummer2 = $_POST['abschliessen'];
+
+            $listearray = $liste->getEinzelnerDatensatz($uebgergebenepersonalnummer2);
+            $listearraykurz = $listearray[0];
+
+            die(var_dump($uebgergebenepersonalnummer2));
             // Kürtzt den oberen Datensatz, damit die Daten ausgelesen werden können.
-            $listekurz = $listearray[0];
+            $listekurz = $listearraykurz;
 
             // Setzt lokale Variablen aus dem Model.
             $vorname = $listekurz['vorname'];

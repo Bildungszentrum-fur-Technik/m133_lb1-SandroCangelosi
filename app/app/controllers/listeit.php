@@ -6,8 +6,7 @@ class Listeit extends Controller
     {
         // Holt sich die Fake Personen Liste aus dem Model. Damit diese auf der Liste angezeigt werden können.
         $liste = $this->model('EintrittModel');
-        $listearray = $liste->getAdminList();
-        //$listebearbeiten = $liste->getBearbeitenList();
+        $listearray = $liste->getBearbeitenList();
 
         // Wenn der Button "bearbeiten" geklickt wird, dann wird das if aktiviert.
         if (isset($_POST['bearbeiten'])) {
@@ -32,6 +31,7 @@ class Listeit extends Controller
             $bemerkungenhr = $listearrayob1['bemerkungenhr'];
 
 
+
             $data = [
                 'vorname' => $vorname,
                 'nachname' => $nachname,
@@ -46,6 +46,9 @@ class Listeit extends Controller
                 'sapuser' => $sapuser,
                 'bemerkungenhr' => $bemerkungenhr,
             ];
+
+            
+                
 
             // Rendert die View "bearbeiten" und setzt den Webseitentitel auf "Eintritt bearbeiten".
             echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);

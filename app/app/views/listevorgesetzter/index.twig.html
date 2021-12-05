@@ -52,12 +52,12 @@
                 {% if datarow.eintrittstatus >= 2 %}
                 <form action="{{ urlroot }}/abschliessen/index" method="post">
                     <td><button class="button platz2" name="abschliessen"
-                            type="submit">Eintritt abschliessen</button></td>
+                            type="submit" value="{{ datarow.personalnummer }}">Eintritt abschliessen</button></td>
                 </form>
                 <form action="{{ urlroot }}/listevorgesetzter/index"
                     method="post">
                     <td><button class="button platz2 buttonred" name="loeschen"
-                            type="submit">Eintritt löschen</button></td>
+                            type="submit" value="{{ datarow.personalnummer }}">Eintritt löschen</button></td>
                 </form>
                 {% else%}
                 {# Falls der User noch bei der IT ist, jedoch trotzdem die

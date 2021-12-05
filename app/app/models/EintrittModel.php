@@ -40,7 +40,15 @@ class EintrittModel extends BaseModel
 
     public function getBearbeitenList()
     {
-        $this->db->query("SELECT * FROM `usereintritt` WHERE `eintrittstatus` = '1' AND `vorname` = 'Gustav'");
+        $this->db->query("SELECT * FROM `usereintritt` WHERE `eintrittstatus` = '1'");
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+    public function getVorgesetzterList()
+    {
+        $this->db->query("SELECT * FROM `usereintritt` WHERE `eintrittstatus` = '2'");
         $results = $this->db->resultSet();
 
         return $results;
@@ -51,6 +59,45 @@ class EintrittModel extends BaseModel
         $results = $this->db->resultSet();
 
         return $results;
+    }
+
+    public function getUpdateDBchecks($persnr, $checkneuerlaptop, $checkneueshandy, $checkneuestelefon, $checkwinuser, $checksapuser, $checkdrucker, $bemerkungenit){
+        
+        
+        if($checkneuerlaptop == NULL){
+            $checkneuerlaptop = 0;
+        }
+
+        if($checkneueshandy == NULL){
+            $checkneueshandy = 0;
+        }
+
+        if($checkneuestelefon == NULL){
+            $checkneuestelefon = 0;
+        }
+
+        if($checkwinuser == NULL){
+            $checkwinuser = 0;
+        }
+
+        if($checksapuser == NULL){
+            $checksapuser = 0;
+        }
+
+        if($checkdrucker == NULL){
+            $checkdrucker = 0;
+        }
+        
+
+
+        $this->db->query("UPDATE usereintritt SET `checkneuerlaptop` = $checkneuerlaptop, `checkneueshandy` = $checkneueshandy, `checkneuestelefon`= $checkneuestelefon, `checkwinuser` = $checkwinuser, `checksapuser` = $checksapuser, `checkdrucker` = $checkdrucker, `bemerkungenit` = '$bemerkungenit', `eintrittstatus` = 2  WHERE `personalnummer` = $persnr");
+        
+        $this->db->execute();
+        
+        /*$this->db->query("UPDATE usereintritt
+        SET checkneuerlaptop = $checkneuerlaptop, checkneueshandy = $checkneueshandy, checkneuestelefon = $checkneuestelefon, checkwinuser = $checkwinuser, checksapuser = $checksapuser, checkdrucker = $checkdrucker, bemerkungenit = $bemerkungenit
+        WHERE `personalnummer` = $persnr; ");
+        */
     }
 
     public function DateninDBschreibenUserEintritt($data)
@@ -98,15 +145,15 @@ class EintrittModel extends BaseModel
         return $this->db->execute(); // Gibt True im Erfolgsfall, False im Fehlerfall
     }
 
-    
-    /*
-    public function getEinzelnerDatensatz()
+    public function getVorgesetzterLoeschen($persnr)
     {
-        $this->db->query("SELECT * FROM usereintritt WHERE parameter = :parameter");
+        $this->db->query("DELETE FROM usereintritt WHERE `personalnummer` = $persnr");
         $results = $this->db->resultSet();
 
         return $results;
-    }*/
+    }
+    
+    
     
 
 
