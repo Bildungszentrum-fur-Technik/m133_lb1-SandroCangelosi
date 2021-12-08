@@ -16,7 +16,9 @@ class Listevorgesetzter extends Controller
 
             $uebgergebenepersonalnummer = $_POST['loeschen'];
 
-            $liste->getVorgesetzterLoeschen($uebgergebenepersonalnummer);
+            $liste->VorgesetzterLoeschen($uebgergebenepersonalnummer);
+            $listearray = $liste->getVorgesetzterList();
+
             echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $listearray]);
 
             // Falls der Button "loeschen" nicht gedrückt wird, wird der Coder hier unten ausgeführt.    
@@ -82,6 +84,11 @@ class Listevorgesetzter extends Controller
                     'alleserledigt' => $alleserledigt,
                     'status' => $status,
                 ];
+
+                //$liste->VorgesetzterAbschliessen($data);
+                //$listearray = $liste->getAdminList();
+
+                
 
                 // Rendert die View "abschliessen" mit dem Titel "Eintritt Liste Vorgesetzter". Der Datensatz von oben wird auch zum Anzeigen übergeben.
                 echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $data]);

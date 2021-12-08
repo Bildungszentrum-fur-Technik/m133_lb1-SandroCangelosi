@@ -16,7 +16,7 @@ class Abschliessen extends Controller
             $listearray = $liste->getEinzelnerDatensatz($uebgergebenepersonalnummer2);
             $listearraykurz = $listearray[0];
 
-            die(var_dump($uebgergebenepersonalnummer2));
+            //die(var_dump($uebgergebenepersonalnummer2));
             // Kürtzt den oberen Datensatz, damit die Daten ausgelesen werden können.
             $listekurz = $listearraykurz;
 
@@ -69,17 +69,28 @@ class Abschliessen extends Controller
 
             ];
 
+            //die(var_dump($data));
+
             // Falls der Button "fertigabschliessen" aus der View "abschliessen" gedrückt wird, würde der untere Code ausgeführt werden.
             if (isset($_POST['fertigabschliessen'])) {
 
+                echo $uebgergebenepersonalnummer2;
+
                 // Setzt Alleserledigt auf "true" sowie den Status auf "3". 
                 // Das wird für die View gemacht, damit die Daten richtig angezeigt werden. Der EIntritt wird auf geschlossen gestellt.
-                $data['alleserledigt'] = 'true';
-                $data['status'] = '3';
+                //$data['alleserledigt'] = 'true';
+                //$data['status'] = '3';
+
+                //$liste->VorgesetzterAbschliessen($uebgergebenepersonalnummer2);
+                //$listearray = $liste->getAdminList();
+                
 
                 // Zeigt den Datensatz an
-                die(var_dump($data));
+                //die(var_dump($listearray));
+                //echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $listearray]);
             } else {
+                
+                
 
                 // Rendert die View "abschliessen" mit einem Seitentitel und den obenere Fake Daten.
                 echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $data]);
@@ -88,7 +99,7 @@ class Abschliessen extends Controller
 
             // Die Personen Liste wird aus dem Model "EintrittModel" geholt, damit die Liste für den Vorgesetzten Daten enhält.
             $liste = $this->model('EintrittModel');
-            $data = $liste->getFakePersonList();
+            $data = $liste->getVorgesetzterList();
 
             // Zeigt die Liste für den Vorgesetzten an (listevorgesetzter) mit Fake Daten und einem Webseitentitel.
             echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $data]);

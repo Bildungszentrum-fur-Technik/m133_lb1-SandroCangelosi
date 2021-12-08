@@ -212,7 +212,7 @@ class Erstellen extends Controller
                 {
                     // Erfolgsfall
                     // Umleiten auf Liste meiner Bestellungen
-                    redirect('home/index.twig.html');
+                    redirect('erstellen');
                 } else 
                 {
                     echo "Daten konnten nicht in die Datenbank geschrieben werden";

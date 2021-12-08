@@ -145,12 +145,18 @@ class EintrittModel extends BaseModel
         return $this->db->execute(); // Gibt True im Erfolgsfall, False im Fehlerfall
     }
 
-    public function getVorgesetzterLoeschen($persnr)
+    public function VorgesetzterLoeschen($persnr)
     {
-        $this->db->query("DELETE FROM usereintritt WHERE `personalnummer` = $persnr");
-        $results = $this->db->resultSet();
+        $this->db->query("UPDATE usereintritt SET  `eintrittstatus` = 4 WHERE `personalnummer` = $persnr");
 
-        return $results;
+        $this->db->execute();
+    }
+
+    public function VorgesetzterAbschliessen($persnr)
+    {
+        $this->db->query("UPDATE usereintritt SET  `eintrittstatus` = 3, `alleserledigt` = 1 WHERE `personalnummer` = $persnr");
+
+        $this->db->execute();
     }
     
     
