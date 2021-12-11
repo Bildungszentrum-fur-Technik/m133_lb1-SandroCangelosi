@@ -212,10 +212,10 @@ class Erstellen extends Controller
                 {
                     // Erfolgsfall
                     // Umleiten auf Liste meiner Bestellungen
-                    redirect('erstellen');
+                    echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erfolgreich erstellen", 'eintritterstellt'=>1]);
                 } else 
                 {
-                    echo "Daten konnten nicht in die Datenbank geschrieben werden";
+                    echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen fehlgeschlagen", 'eintritterstellt'=>2]);
                 }
 
 
@@ -231,7 +231,7 @@ class Erstellen extends Controller
             } else {
 
                 // Bei einem Fehler, wird die "erstellen" View nochmals gerendet. Durch das übergebene "data" werden die Fehlermeldungen angezeigt. Der Seitentitel wird natürlcih auch gesetzt.
-                echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data]);
+                echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data, ]);
             }
         } else {
 

@@ -4,6 +4,15 @@
 
 <!-- Wir überschreiben den Content-Block -->
 <h1 class="mt-5">Übersicht Eintritte Vorgesetzter</h1>
+{% if eintritterstellt == 1 %}
+    <div class="alert alert-success" role="alert">
+        <p>Der Eintritt wurde erfolreich abgeschlossen</p>
+    </div>
+    {% elseif eintritterstellt == 2 %}
+        <div class="alert alert-danger" role="alert">
+            <p>Der Eintritt konnte nicht abgeschlossen werden</p>
+        </div> 
+{% endif %}
 <div class="scrolltabelle platzunten">
     <table class="table tableplatz">
         <thead class="thead-dark">

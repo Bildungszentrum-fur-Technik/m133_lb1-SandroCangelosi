@@ -19,7 +19,15 @@ class Listevorgesetzter extends Controller
             $liste->VorgesetzterLoeschen($uebgergebenepersonalnummer);
             $listearray = $liste->getVorgesetzterList();
 
-            echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $listearray]);
+            if($liste == 1){
+
+                echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte erfolgreich gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray, 'eintritterstellt'=>1]);
+            }else{
+                echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte nicht gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray ,'eintritterstellt'=>2]);
+                
+            }
+
+            
 
             // Falls der Button "loeschen" nicht gedrückt wird, wird der Coder hier unten ausgeführt.    
         } else {

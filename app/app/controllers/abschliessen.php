@@ -13,6 +13,10 @@ class Abschliessen extends Controller
             $liste = $this->model('EintrittModel');
             $listearray = $liste->getVorgesetzterList();
 
+            
+
+            
+
             // Falls der Button "fertigabschliessen" aus der View "abschliessen" gedrückt wird, würde der untere Code ausgeführt werden.
             if (isset($_POST['fertigabschliessen'])) {
 
@@ -29,11 +33,19 @@ class Abschliessen extends Controller
                 $fertigabschliessen = $_POST['fertigabschliessen'];
                 $liste->VorgesetzterAbschliessen($fertigabschliessen);
                 $listearray = $liste->getAdminList();
+
+                if($liste == 1){
+
+                    echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt wurde erfolgreich abgeschlossen", 'urlroot' => URLROOT, 'data' => $listearray, 'eintritterstellt'=>1]);
+                }else{
+                    echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte nicht abgeschlossen werden", 'urlroot' => URLROOT, 'data' => $listearray ,'eintritterstellt'=>2]);
+                    
+                }
                 
 
                 // Zeigt den Datensatz an
                 //die(var_dump($listearray));
-                echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $listearray]);
+                
             } else {
 
                 // Holt sich einen einzelnen Datensatz aus dem Model "EintrittModel".
