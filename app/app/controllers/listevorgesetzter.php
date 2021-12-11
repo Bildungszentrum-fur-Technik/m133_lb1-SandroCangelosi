@@ -59,6 +59,8 @@ class Listevorgesetzter extends Controller
                 $alleserledigt = $listearraykurz['alleserledigt'];
                 $status = $listearraykurz['status'];
 
+                
+
 
                 // Die geholten Daten von oben werden hier in einen einzelnen Array verpackt.
                 $data = [
@@ -85,7 +87,7 @@ class Listevorgesetzter extends Controller
                     'status' => $status,
                 ];
 
-                //$liste->VorgesetzterAbschliessen($data);
+                //$bubble = $liste->VorgesetzterAbschliessen($data);
                 //$listearray = $liste->getAdminList();
 
                 

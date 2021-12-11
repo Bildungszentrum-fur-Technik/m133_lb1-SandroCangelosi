@@ -87,7 +87,6 @@ class Bearbeiten extends Controller
                 
                 
                 if($errormessage == NULL){
-
                     echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
                 }else{
                     die(var_dump($errormessage));

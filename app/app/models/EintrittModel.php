@@ -154,9 +154,9 @@ class EintrittModel extends BaseModel
 
     public function VorgesetzterAbschliessen($persnr)
     {
-        $this->db->query("UPDATE usereintritt SET  `eintrittstatus` = 3, `alleserledigt` = 1 WHERE `personalnummer` = $persnr");
+        $this->db->query("UPDATE usereintritt SET `eintrittstatus` = 3, `alleserledigt` = 1 WHERE `personalnummer` = $persnr");
 
-        $this->db->execute();
+        return $this->db->execute();
     }
     
     

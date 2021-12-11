@@ -119,7 +119,7 @@
     <textarea placeholder="Alles i.O." readonly="readonly" name="bemerkungenit"
         id="bemerkungenit" cols="50" rows="10">{% if data.bemerkungenit %}
         {{data.bemerkungenit}} {% endif %}</textarea>
-    <button class="button platz" name="fertigabschliessen" type="submit">Eintritt
+    <button class="button platz" type="submit" name="fertigabschliessen" value="{{ data.personalnummer }}">Eintritt
         abschliessen</button>
 </form>
 {% endblock %}
