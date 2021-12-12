@@ -5,13 +5,13 @@
 <!-- Wir überschreiben den Content-Block -->
 <h1 class="mt-5">Übersicht Eintritte Vorgesetzter</h1>
 {% if eintritterstellt == 1 %}
-    <div class="alert alert-success" role="alert">
-        <p>Der Eintritt wurde erfolreich abgeschlossen</p>
-    </div>
-    {% elseif eintritterstellt == 2 %}
-        <div class="alert alert-danger" role="alert">
-            <p>Der Eintritt konnte nicht abgeschlossen werden</p>
-        </div> 
+<div class="alert alert-success" role="alert">
+    <p>Der Eintritt wurde erfolreich abgeschlossen</p>
+</div>
+{% elseif eintritterstellt == 2 %}
+<div class="alert alert-danger" role="alert">
+    <p>Der Eintritt konnte nicht abgeschlossen werden</p>
+</div>
 {% endif %}
 <div class="scrolltabelle platzunten">
     <table class="table tableplatz">
@@ -61,12 +61,14 @@
                 {% if datarow.eintrittstatus >= 2 %}
                 <form action="{{ urlroot }}/abschliessen/index" method="post">
                     <td><button class="button platz2" name="abschliessen"
-                            type="submit" value="{{ datarow.personalnummer }}">Eintritt abschliessen</button></td>
+                            type="submit" value="{{ datarow.personalnummer }}">Eintritt
+                            abschliessen</button></td>
                 </form>
                 <form action="{{ urlroot }}/listevorgesetzter/index"
                     method="post">
                     <td><button class="button platz2 buttonred" name="loeschen"
-                            type="submit" value="{{ datarow.personalnummer }}">Eintritt löschen</button></td>
+                            type="submit" value="{{ datarow.personalnummer }}">Eintritt
+                            löschen</button></td>
                 </form>
                 {% else%}
                 {# Falls der User noch bei der IT ist, jedoch trotzdem die
