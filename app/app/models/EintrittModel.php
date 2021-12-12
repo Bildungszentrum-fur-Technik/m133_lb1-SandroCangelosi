@@ -2,198 +2,167 @@
 
 class EintrittModel extends BaseModel
 {
-    /*
-    // HR
-    private $personalnummer;
-    private $vorname;
-    private $nachname;
-    private $mittelname;
-    private $jobtitel;
-    private $eintrittdatum;
-    private $neuerlaptop;
-    private $neueshandy;
-    private $neuestelefon;
-    private $winuser;
-    private $sapuser;
-    private $bemerkungenhr;
-
-    // IT
-    private $checkneuerlaptop;
-    private $checkneueshandy;
-    private $checkneuestelefon;
-    private $checkwinuser;
-    private $checksapuser;
-    private $checkdrucker;
-    private $bemerkungenit;
-
-    // Vorgesetzter
-    private $alleserledigt;
-    */
-
+    // Liste für den Administrator
     public function getAdminList()
     {
+        // SQL Befehl mit Variablen welche von unten befüllt werden
         $this->db->query("SELECT * FROM usereintritt");
         $results = $this->db->resultSet();
 
         return $results;
     }
 
+    // Liste für die IT
     public function getBearbeitenList()
     {
+        // SQL Befehl mit Variablen welche von unten befüllt werden
         $this->db->query("SELECT * FROM `usereintritt` WHERE `eintrittstatus` = '1'");
         $results = $this->db->resultSet();
 
         return $results;
     }
 
+    // Liste für den Vorgesetzen
     public function getVorgesetzterList()
     {
+        // SQL Befehl mit Variablen welche von unten befüllt werden
         $this->db->query("SELECT * FROM `usereintritt` WHERE `eintrittstatus` = '2'");
         $results = $this->db->resultSet();
 
         return $results;
     }
 
-    public function getEinzelnerDatensatz($persnr){
-        $this->db->query("SELECT * FROM `usereintritt` WHERE `personalnummer` =  $persnr");
+    // Holt sich einen einzelnen Datensazu mit der Personalnummer
+    public function getEinzelnerDatensatz($persnr)
+    {
+        // SQL Befehl mit Variablen welche von unten befüllt werden
+        $this->db->query("SELECT * FROM `usereintritt` WHERE `personalnummer` = :personalnummer");
+
+        // Falls die rechte Variable gültig ist wird diese in einem Erfolgsfall an die linkt übergeben
+        $this->db->bind(':personalnummer', $persnr);
+
         $results = $this->db->resultSet();
 
         return $results;
     }
 
-    public function getUpdateDBchecks($persnr, $checkneuerlaptop, $checkneueshandy, $checkneuestelefon, $checkwinuser, $checksapuser, $checkdrucker, $bemerkungenit){
-        
-        
-        if($checkneuerlaptop == NULL){
+    // Fügt neue Daten der Datenbank hinzu
+    public function getUpdateDBchecks($persnr, $checkneuerlaptop, $checkneueshandy, $checkneuestelefon, $checkwinuser, $checksapuser, $checkdrucker, $bemerkungenit)
+    {
+        // Standartwert von allen Boleans von Null auf 0 setzen. Wenn der Wert nicht auf 1 gesetzt ist. 
+        if ($checkneuerlaptop == NULL) {
             $checkneuerlaptop = 0;
         }
 
-        if($checkneueshandy == NULL){
+        if ($checkneueshandy == NULL) {
             $checkneueshandy = 0;
         }
 
-        if($checkneuestelefon == NULL){
+        if ($checkneuestelefon == NULL) {
             $checkneuestelefon = 0;
         }
 
-        if($checkwinuser == NULL){
+        if ($checkwinuser == NULL) {
             $checkwinuser = 0;
         }
 
-        if($checksapuser == NULL){
+        if ($checksapuser == NULL) {
             $checksapuser = 0;
         }
 
-        if($checkdrucker == NULL){
+        if ($checkdrucker == NULL) {
             $checkdrucker = 0;
         }
-        
 
+        // SQL Befehl mit Variablen welche von unten befüllt werden
+        $this->db->query("UPDATE usereintritt SET `checkneuerlaptop` = :checkneuerlaptop, `checkneueshandy` = :checkneueshandy, `checkneuestelefon`= :checkneuestelefon, `checkwinuser` = :checkwinuser, `checksapuser` = :checksapuser, `checkdrucker` = :checkdrucker, `bemerkungenit` = :bemerkungenit, `eintrittstatus` = 2  WHERE `personalnummer` = :persnr");
 
-        $this->db->query("UPDATE usereintritt SET `checkneuerlaptop` = $checkneuerlaptop, `checkneueshandy` = $checkneueshandy, `checkneuestelefon`= $checkneuestelefon, `checkwinuser` = $checkwinuser, `checksapuser` = $checksapuser, `checkdrucker` = $checkdrucker, `bemerkungenit` = '$bemerkungenit', `eintrittstatus` = 2  WHERE `personalnummer` = $persnr");
-        
-        $this->db->execute();
-        
-        /*$this->db->query("UPDATE usereintritt
-        SET checkneuerlaptop = $checkneuerlaptop, checkneueshandy = $checkneueshandy, checkneuestelefon = $checkneuestelefon, checkwinuser = $checkwinuser, checksapuser = $checksapuser, checkdrucker = $checkdrucker, bemerkungenit = $bemerkungenit
-        WHERE `personalnummer` = $persnr; ");
-        */
+        // Falls die rechte Variable gültig ist wird diese in einem Erfolgsfall an die linkt übergeben
+        $this->db->bind(':checkneuerlaptop', $checkneuerlaptop);
+        $this->db->bind(':checkneueshandy', $checkneueshandy);
+        $this->db->bind(':checkneuestelefon', $checkneuestelefon);
+        $this->db->bind(':checkwinuser', $checkwinuser);
+        $this->db->bind(':checksapuser', $checksapuser);
+        $this->db->bind(':checkdrucker', $checkdrucker);
+        $this->db->bind(':bemerkungenit', $bemerkungenit);
+        $this->db->bind(':persnr', $persnr);
+
+        // Gibt True im Erfolgsfall, False im Fehlerfall
+        return $this->db->execute();
     }
 
+    // Fügt neue Daten in die DB ein
     public function DateninDBschreibenUserEintritt($data)
     {
+        // SQL Befehl mit Variablen welche von unten befüllt werden
         $this->db->query("INSERT INTO usereintritt(vorname, mittelname, nachname, jobtitel, eintrittdatum, neuerlaptop, neueshandy, neuestelefon, winuser, sapuser, bemerkungenhr, eintrittstatus) 
         VALUES (:vorname, :mittelname , :nachname, :jobtitel, :eintrittdatum, :neuerlaptop, :neueshandy, :neuestelefon, :winuser, :sapuser, :bemerkungenhr, :eintrittstatus)");
-        
+
 
         // Standartwert von allen Boleans von Null auf 0 setzen. Wenn der Wert nicht auf 1 gesetzt ist. 
-        if($data['neuerlaptop'] == NULL){
+        if ($data['neuerlaptop'] == NULL) {
             $data['neuerlaptop'] = 0;
         }
 
-        if($data['neueshandy'] == NULL){
+        if ($data['neueshandy'] == NULL) {
             $data['neueshandy'] = 0;
         }
 
-        if($data['neuestelefon'] == NULL){
+        if ($data['neuestelefon'] == NULL) {
             $data['neuestelefon'] = 0;
         }
 
-        if($data['winuser'] == NULL){
+        if ($data['winuser'] == NULL) {
             $data['winuser'] = 0;
         }
 
-        if($data['sapuser'] == NULL){
+        if ($data['sapuser'] == NULL) {
             $data['sapuser'] = 0;
         }
-        
 
-        $this->db->bind(':vorname',$data['vorname']);
-        $this->db->bind(':mittelname',$data['mittelname']);
-        $this->db->bind(':nachname',$data['nachname']);
-        $this->db->bind(':jobtitel',$data['jobtitel']);
-        $this->db->bind(':eintrittdatum',$data['eintrittdatum']);
-        $this->db->bind(':neuerlaptop',$data['neuerlaptop']);
-        $this->db->bind(':neueshandy',$data['neueshandy']);
-        $this->db->bind(':neuestelefon',$data['neuestelefon']);
-        $this->db->bind(':winuser',$data['winuser']);
-        $this->db->bind(':sapuser',$data['sapuser']);
-        $this->db->bind(':bemerkungenhr',$data['bemerkungenhr']);
+        // Falls die rechte Variable gültig ist wird diese in einem Erfolgsfall an die linkt übergeben
+        $this->db->bind(':vorname', $data['vorname']);
+        $this->db->bind(':mittelname', $data['mittelname']);
+        $this->db->bind(':nachname', $data['nachname']);
+        $this->db->bind(':jobtitel', $data['jobtitel']);
+        $this->db->bind(':eintrittdatum', $data['eintrittdatum']);
+        $this->db->bind(':neuerlaptop', $data['neuerlaptop']);
+        $this->db->bind(':neueshandy', $data['neueshandy']);
+        $this->db->bind(':neuestelefon', $data['neuestelefon']);
+        $this->db->bind(':winuser', $data['winuser']);
+        $this->db->bind(':sapuser', $data['sapuser']);
+        $this->db->bind(':bemerkungenhr', $data['bemerkungenhr']);
 
-        $this->db->bind(':eintrittstatus',1); // Neuer Eintritt, Der Status wird immer automatisch auf 1 gesetzt
+        // Neuer Eintritt, Der Status wird immer automatisch auf 1 gesetzt
+        $this->db->bind(':eintrittstatus', 1);
 
-        return $this->db->execute(); // Gibt True im Erfolgsfall, False im Fehlerfall
-    }
-
-    public function VorgesetzterLoeschen($persnr)
-    {
-        $this->db->query("UPDATE usereintritt SET  `eintrittstatus` = 4 WHERE `personalnummer` = $persnr");
-
-        $this->db->execute();
-    }
-
-    public function VorgesetzterAbschliessen($persnr)
-    {
-        $this->db->query("UPDATE usereintritt SET `eintrittstatus` = 3, `alleserledigt` = 1 WHERE `personalnummer` = $persnr");
-
+        // Gibt True im Erfolgsfall, False im Fehlerfall
         return $this->db->execute();
     }
-    
-    
-    
 
-
-    
-
-
-    
-
-
-
-    // Liste von Fake Pesonen
-    public function getFakePersonList()
+    // Setzt einen Eintritt mittels Personalnummer auf gelöscht
+    public function VorgesetzterLoeschen($persnr)
     {
-        $data = [
-            ['personalnummer' => '1', 'vorname' => 'Max', 'nachname' => 'Muster', 'mittelname' => 'Heinz', 'jobtitel' => 'Informatiker', 'eintrittdatum' => '01.01.1990', 'neuerlaptop' => true, 'neueshandy' => true, 'neuestelefon' => true, 'winuser' => true, 'sapuser' => true, 'bemerkungenhr' => 'Bitte schnell machen, es ist dringend', 'checkneuerlaptop' => true, 'checkneueshandy' => true, 'checkneuestelefon' => true, 'checkwinuser' => true, 'checksapuser' => true, 'checkdrucker' => true, 'bemerkungenit' => 'Alles perfekt erledigt', 'alleserledigt' => true, 'status' => '3'],
-            ['personalnummer' => '2', 'vorname' => 'Gustav', 'nachname' => 'Amtor', 'mittelname' => '', 'jobtitel' => 'Schreiner', 'eintrittdatum' => '23.09.2021', 'neuerlaptop' => true, 'neueshandy' => true, 'neuestelefon' => true, 'winuser' => true, 'sapuser' => true, 'bemerkungenhr' => 'Bitte schnell machen, es ist dringend', 'checkneuerlaptop' => false, 'checkneueshandy' => false, 'checkneuestelefon' => false, 'checkwinuser' => false, 'checksapuser' => false, 'checkdrucker' => false, 'bemerkungenit' => 'erledigt', 'alleserledigt' => false, 'status' => '2'],
-            ['personalnummer' => '3', 'vorname' => 'Peter', 'nachname' => 'Linch', 'mittelname' => 'Rafael', 'jobtitel' => 'Mechaniker', 'eintrittdatum' => '19.12.2005', 'neuerlaptop' => false, 'neueshandy' => false, 'neuestelefon' => false, 'winuser' => false, 'sapuser' => false, 'bemerkungenhr' => 'Schnell machen bitte', 'checkneuerlaptop' => false, 'checkneueshandy' => false, 'checkneuestelefon' => false, 'checkwinuser' => false, 'checksapuser' => false, 'checkdrucker' => false, 'bemerkungenit' => '', 'alleserledigt' => false, 'status' => '1'],
-            ['personalnummer' => '2', 'vorname' => 'Christoph', 'nachname' => 'Meier', 'mittelname' => '', 'jobtitel' => 'Vorgesetzter', 'eintrittdatum' => '23.09.2011', 'neuerlaptop' => true, 'neueshandy' => true, 'neuestelefon' => true, 'winuser' => true, 'sapuser' => true, 'bemerkungenhr' => 'Bitte schnell machen, es ist dringend', 'checkneuerlaptop' => false, 'checkneueshandy' => false, 'checkneuestelefon' => false, 'checkwinuser' => false, 'checksapuser' => false, 'checkdrucker' => false, 'bemerkungenit' => '', 'alleserledigt' => false, 'status' => '2'],
-            ['personalnummer' => '3', 'vorname' => 'Michael', 'nachname' => 'Xing', 'mittelname' => '', 'jobtitel' => 'Pfleger', 'eintrittdatum' => '19.12.2015', 'neuerlaptop' => false, 'neueshandy' => false, 'neuestelefon' => false, 'winuser' => false, 'sapuser' => false, 'bemerkungenhr' => '', 'checkneuerlaptop' => false, 'checkneueshandy' => false, 'checkneuestelefon' => false, 'checkwinuser' => false, 'checksapuser' => false, 'checkdrucker' => false, 'bemerkungenit' => '', 'alleserledigt' => false, 'status' => '1'],
-            ['personalnummer' => '4', 'vorname' => 'Jordan', 'nachname' => 'Belfort', 'mittelname' => '', 'jobtitel' => 'Anlagebreater', 'eintrittdatum' => '11.04.2020', 'neuerlaptop' => true, 'neueshandy' => true, 'neuestelefon' => false, 'winuser' => true, 'sapuser' => false, 'bemerkungenhr' => '', 'checkneuerlaptop' => false, 'checkneueshandy' => false, 'checkneuestelefon' => false, 'checkwinuser' => false, 'checksapuser' => false, 'checkdrucker' => false, 'bemerkungenit' => 'Bitte löschen, Schreibfehler', 'alleserledigt' => false, 'status' => '4'],
+        // SQL Befehl mit Variablen welche von unten befüllt werden
+        $this->db->query("UPDATE usereintritt SET  `eintrittstatus` = 4 WHERE `personalnummer` = :personalnummer");
 
-        ];
+        // Falls die rechte Variable gültig ist wird diese in einem Erfolgsfall an die linkt übergeben
+        $this->db->bind(':personalnummer', $persnr);
 
-        return $data;
+        // Gibt True im Erfolgsfall, False im Fehlerfall
+        return $this->db->execute();
     }
 
-    // Liste von einem einzelnen Datensatz von einer Person
-    public function getFakeSingleDataSet()
+    // Schliesst einen Eintritt mit der Personalnummer
+    public function VorgesetzterAbschliessen($persnr)
     {
-        $data = [
-            ['personalnummer' => '1', 'vorname' => 'Sandro', 'nachname' => 'Cangelosi', 'mittelname' => 'Fritz', 'jobtitel' => 'Informatiker', 'eintrittdatum' => '01.01.1990', 'neuerlaptop' => true, 'neueshandy' => true, 'neuestelefon' => true, 'winuser' => true, 'sapuser' => true, 'bemerkungenhr' => 'Bitte schnell machen', 'checkneuerlaptop' => true, 'checkneueshandy' => true, 'checkneuestelefon' => true, 'checkwinuser' => true, 'checksapuser' => true, 'checkdrucker' => true, 'bemerkungenit' => 'Alles perfekt erledigt', 'alleserledigt' => true, 'status' => '3'],
+        // SQL Befehl mit Variablen welche von unten befüllt werden
+        $this->db->query("UPDATE usereintritt SET `eintrittstatus` = 3, `alleserledigt` = 1 WHERE `personalnummer` = :personalnummer");
 
-        ];
+        // Falls die rechte Variable gültig ist wird diese in einem Erfolgsfall an die linkt übergeben
+        $this->db->bind(':personalnummer', $persnr);
 
-        return $data;
+        // Gibt True im Erfolgsfall, False im Fehlerfall
+        return $this->db->execute();
     }
 }

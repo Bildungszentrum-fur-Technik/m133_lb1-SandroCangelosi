@@ -76,7 +76,7 @@ class Erstellen extends Controller
             ];
 
 
-            // Überprüfung des Vornamen
+            // Überprüfung des Vornamens
             // Überprüft, ob die Eingabe leer ist, dann wird im Array die Vorname Fehlermeldung beschrieben.
             if (empty($data['vorname'])) {
                 $data['vorname_error'] = 'Bitte einen gültigen Vornamen eingeben';
@@ -202,36 +202,21 @@ class Erstellen extends Controller
             // Falls die obere Validierung keine Errors verursacht hat, wird der untere Code ausgesührt.
             if (empty($data['vorname_error']) && empty($data['mittelname_error']) && empty($data['nachname_error']) && empty($data['jobtitel_error'])  && empty($data['eintrittdatum_error'])) {
 
-
-
-
-
-
                 $EintrittModel = $this->model('EintrittModel');
-                if ($EintrittModel->DateninDBschreibenUserEintritt($data))
-                {
+
+                // Falls es keinen Fehler gegeben hat, werden die Daten in die DB geschrieben
+                if ($EintrittModel->DateninDBschreibenUserEintritt($data)) {
                     // Erfolgsfall
                     // Umleiten auf Liste meiner Bestellungen
-                    echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erfolgreich erstellen", 'eintritterstellt'=>1]);
-                } else 
-                {
-                    echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen fehlgeschlagen", 'eintritterstellt'=>2]);
+                    echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erfolgreich erstellen", 'eintritterstellt' => 1]);
+                } else {
+                    // Fehlerfall
+                    echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen fehlgeschlagen", 'eintritterstellt' => 2]);
                 }
-
-
-
-
-
-
-
-
-
-                // Zeigt den Datensatz an
-                //die(var_dump($data));
             } else {
 
                 // Bei einem Fehler, wird die "erstellen" View nochmals gerendet. Durch das übergebene "data" werden die Fehlermeldungen angezeigt. Der Seitentitel wird natürlcih auch gesetzt.
-                echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data, ]);
+                echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data,]);
             }
         } else {
 

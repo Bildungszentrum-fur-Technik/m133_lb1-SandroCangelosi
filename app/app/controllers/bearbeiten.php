@@ -36,70 +36,33 @@ class Bearbeiten extends Controller
                 filter_input(INPUT_POST, 'bemerkungenit', FILTER_UNSAFE_RAW)
             );
 
-            // Holt sich einen Fake Datensatz aus dem Model.
-            
-            /*$liste = $this->model('EintrittModel');
-            $listearray = $liste->getFakeSingleDataSet();
-
-            // Kürzt den Array, damit die Daten ausgelesen werden können.
-            $listekurz = $listearray[0];
-
-            // Setzt lokale Variablen, aus dem gekürtzten Array oben.
-            $vorname = $listekurz['vorname'];
-            $mittelname = $listekurz['mittelname'];
-            $nachname = $listekurz['nachname'];
-            $jobtitel = $listekurz['jobtitel'];
-            $personalnummer = $listekurz['personalnummer'];
-            $eintrittdatum = $listekurz['eintrittdatum'];
-            $neuerlaptop = $listekurz['neuerlaptop'];
-            $neueshandy = $listekurz['neueshandy'];
-            $neuestelefon = $listekurz['neuestelefon'];
-            $winuser = $listekurz['winuser'];
-            $sapuser = $listekurz['sapuser'];
-            $bemerkungenhr = $listekurz['bemerkungenhr'];
-            $status = $listekurz['status'];
-            */
-
+            // Holt sich die Liste für das bearbeiten
             $liste = $this->model('EintrittModel');
             $data = $liste->getBearbeitenList();
-            
-            
-            
-            //die(var_dump($data));
-            // Wenn der Button "bemerkungenit" gedrückt wird wird der Datensazu "data" angezeigt.
-            /*if (isset($_POST['bemerkungenit'])) {
 
-                // Zeigt den Datensatz an
-                die(var_dump($data));
-            } else {
+            // Falls der Button "aktualisieren" gedrückt wird, wird der untere Code ausgeführt.
+            if (isset($_POST['aktualisieren'])) {
 
-                // Zeigt die View "bearbeiten" an, mit dem Seitentitel "Eintritts Checkliste bearbeiten".
-                
-            }*/
-
-            if (isset($_POST['aktualisieren'])){
-
+                // Holt sich die übergebene Personalnummer
                 $uebgergebenepersonalnummer = $_POST['aktualisieren'];
-                
+
+                // Führt den Update aus
                 $errormessage = $liste->getUpdateDBchecks($uebgergebenepersonalnummer, $checkneuerlaptop, $checkneueshandy, $checkneuestelefon, $checkwinuser, $checksapuser, $checkdrucker, $bemerkungenit);
-                
+
+                // Holt sich die Lsite des Bearbeiters
                 $data = $liste->getBearbeitenList();
-                
-                
-                if($errormessage == NULL){
-                    echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt wurde erfolgreich bearbeitet", 'urlroot' => URLROOT, 'data' => $data ,'eintritterstellt'=>1]);
-                    
-                }else{
-                    echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt konnte nicht bearbeitet werden", 'urlroot' => URLROOT, 'data' => $data ,'eintritterstellt'=>2]);
-                    
+
+                // Falls es keinen Fehler gegeben hat wird der obere Code ausgeführt. Eine Fehler oder erfolgreiche Meldung wird erscheinen
+                if (!$errormessage == NULL) {
+                    echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt wurde erfolgreich bearbeitet", 'urlroot' => URLROOT, 'data' => $data, 'eintritterstellt' => 1]);
+                } else {
+                    echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt konnte nicht bearbeitet werden", 'urlroot' => URLROOT, 'data' => $data, 'eintritterstellt' => 2]);
                 }
-                
-            }else{
+            } else {
+                // Die Seite "bearbeiten" wird geladen
                 echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritts Checkliste bearbeiten", 'urlroot' => URLROOT, 'data' => $data]);
             }
 
-
-            
             // Fall der Webseitenaufruf eine GET Request wäre, dann würde der untere Code ausgeführt werden.
         } else {
 
@@ -107,7 +70,7 @@ class Bearbeiten extends Controller
             $liste = $this->model('EintrittModel');
             $listearray = $liste->getAdminList();
 
-            // Rendert die View "listeit" mit einem Webseitentitel. Mit den Fake Daten "data".
+            // Rendert die View "listeit" mit einem Webseitentitel.
             echo $this->twig->render('listeit/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $listearray]);
         }
     }

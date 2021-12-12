@@ -14,103 +14,44 @@ class Listevorgesetzter extends Controller
         // Falls der Button mit dem Name "loeschen" von der View "listevorgesetzter" gedrückt wird, dann wird der untere Code ausgeführt.
         if (isset($_POST['loeschen'])) {
 
+            // Die Personalnummer wird in einer Variable gespeichert
             $uebgergebenepersonalnummer = $_POST['loeschen'];
 
+            // Löscht den Benutzer mit der übergebenen Personalnummer
             $liste->VorgesetzterLoeschen($uebgergebenepersonalnummer);
+
+            // Holt sich jetzt die Liste für den Vorgesetzten.
             $listearray = $liste->getVorgesetzterList();
 
-            if($liste == 1){
-
-                echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte erfolgreich gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray, 'eintritterstellt'=>1]);
-            }else{
-                echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte nicht gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray ,'eintritterstellt'=>2]);
-                
+            // Falls das löschen erfolreich war wird der obere Code ausgeführt
+            if ($liste == 1) {
+                echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte erfolgreich gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray, 'eintritterstellt' => 1]);
+            } else {
+                echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte nicht gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray, 'eintritterstellt' => 2]);
             }
-
-            
 
             // Falls der Button "loeschen" nicht gedrückt wird, wird der Coder hier unten ausgeführt.    
         } else {
 
             // Falls der Button "abschliessen" gedrückt wird, wird der Code hier unten ausgeführt.
             if (isset($_POST['abschliessen'])) {
-                
-                
-            
+
+                // Die Personalnummer wird hier in einer Variable gespeichert
                 $uebergabepersonalnummer = $_POST['abschliessen'];
-        
-                //echo $uebergabepersonalnummer;
+
+                // Ein einzelner Datensatz wird mit der Personalnummer geholt
                 $listearray = $liste->getEinzelnerDatensatz($uebergabepersonalnummer);
                 $listearraykurz = $listearray[0];
-                    
-
-                // Aus dem "listearraykurz" Array werden die Variablen geholt und gespeichert.
-                $vorname = $listearraykurz['vorname'];
-                $mittelname = $listearraykurz['mittelname'];
-                $nachname = $listearraykurz['nachname'];
-                $jobtitel = $listearraykurz['jobtitel'];
-                $personalnummer = $listearraykurz['personalnummer'];
-                $eintrittdatum = $listearraykurz['eintrittdatum'];
-                $neuerlaptop = $listearraykurz['neuerlaptop'];
-                $neueshandy = $listearraykurz['neueshandy'];
-                $neuestelefon = $listearraykurz['neuestelefon'];
-                $winuser = $listearraykurz['winuser'];
-                $sapuser = $listearraykurz['sapuser'];
-                $bemerkungenhr = $listearraykurz['bemerkungenhr'];
-                $checkneuerlaptop = $listearraykurz['checkneuerlaptop'];
-                $checkneueshandy = $listearraykurz['checkneueshandy'];
-                $checkneuestelefon = $listearraykurz['checkneuestelefon'];
-                $checkwinuser = $listearraykurz['checkwinuser'];
-                $checksapuser = $listearraykurz['checksapuser'];
-                $checkdrucker = $listearraykurz['checkdrucker'];
-                $bemerkungenit = $listearraykurz['bemerkungenit'];
-                $alleserledigt = $listearraykurz['alleserledigt'];
-                $status = $listearraykurz['status'];
-
-                
-
-
-                // Die geholten Daten von oben werden hier in einen einzelnen Array verpackt.
-                $data = [
-                    'vorname' => $vorname,
-                    'nachname' => $nachname,
-                    'mittelname' => $mittelname,
-                    'jobtitel' => $jobtitel,
-                    'personalnummer' => $personalnummer,
-                    'eintrittdatum' => $eintrittdatum,
-                    'neuerlaptop' => $neuerlaptop,
-                    'neueshandy' => $neueshandy,
-                    'neuestelefon' => $neuestelefon,
-                    'winuser' => $winuser,
-                    'sapuser' => $sapuser,
-                    'bemerkungenhr' => $bemerkungenhr,
-                    'checkneuerlaptop' => $checkneuerlaptop,
-                    'checkneueshandy' => $checkneueshandy,
-                    'checkneuestelefon' => $checkneuestelefon,
-                    'checkwinuser' => $checkwinuser,
-                    'checksapuser' => $checksapuser,
-                    'checkdrucker' => $checkdrucker,
-                    'bemerkungenit' => $bemerkungenit,
-                    'alleserledigt' => $alleserledigt,
-                    'status' => $status,
-                ];
-
-                //$bubble = $liste->VorgesetzterAbschliessen($data);
-                //$listearray = $liste->getAdminList();
-
-                
 
                 // Rendert die View "abschliessen" mit dem Titel "Eintritt Liste Vorgesetzter". Der Datensatz von oben wird auch zum Anzeigen übergeben.
-                echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $data]);
+                echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $listearraykurz]);
             } else {
 
-                
-
-                // Holt sich die Liste von den Fake Personen.
+                // Holt sich die Liste
                 $liste = $this->model('EintrittModel');
                 $listearray = $liste->getAdminList();
 
-                // Rendert die Fake Personen auf die "listevorgesetzter" View.
+                // Rendert die Liste mit den Personen auf die "listevorgesetzter" View.
                 echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt Liste Vorgesetzter", 'urlroot' => URLROOT, 'data' => $listearray]);
             }
         }
