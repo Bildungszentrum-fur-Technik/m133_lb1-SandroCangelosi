@@ -38,7 +38,7 @@ class Listevorgesetzter extends Controller
 
                     // Falls das löschen erfolreich war wird der obere Code ausgeführt
                     if ($liste == 1) {
-                        echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte erfolgreich gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray, 'eintritterstellt' => 1]);
+                        echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte erfolgreich gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray, 'eintritterstellt' => 3]);
                     } else {
                         echo $this->twig->render('listevorgesetzter/index.twig.html', ['title' => "Eintritt konnte nicht gelöscht werden", 'urlroot' => URLROOT, 'data' => $listearray, 'eintritterstellt' => 2]);
                     }

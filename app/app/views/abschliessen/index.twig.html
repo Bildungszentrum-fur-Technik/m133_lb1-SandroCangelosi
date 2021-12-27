@@ -76,18 +76,23 @@
         data.bemerkungenhr %} {{data.bemerkungenhr}} {% endif %}</textarea>
     <!-- Checkboxen für die Checkliste der IT, welche auch nicht veränderbar ist-->
     <table>
+        {% if data.neuerlaptop == "1" %}
         <tr>
             <td>Neuer Laptop erledigt</td>
             <td><input class="grau" onclick="return false;" type="checkbox"
                     name="checkneuerlaptop" id="checkneuerlaptop" value="1"
                     {% if data.checkneuerlaptop =="1" %} checked {% endif %}></td>
         </tr>
+        {% endif %}
+        {% if data.neueshandy == "1" %}
         <tr>
             <td>Neues Handy erledigt</td>
             <td><input class="grau" onclick="return false;" type="checkbox"
                     name="checkneueshandy" id="checkneueshandy" value="1" {%
                     if data.checkneueshandy =="1" %} checked {% endif %}></td>
         </tr>
+        {% endif %}
+        {% if data.neuestelefon == "1" %}
         <tr>
             <td>Neues Telefon erledigt</td>
             <td><input class="grau" onclick="return false;" type="checkbox"
@@ -95,18 +100,23 @@
                     {% if data.checkneuestelefon =="1" %} checked {% endif
                     %}></td>
         </tr>
+        {% endif %}
+        {% if data.checkwinuser == "1" %}
         <tr>
             <td>Windows Login erledigt</td>
             <td><input class="grau" onclick="return false;" type="checkbox"
                     name="checkwinuser" id="checkwinuser" value="1" {% if
                     data.checkwinuser =="1" %} checked {% endif %}></td>
         </tr>
+        {% endif %}
+        {% if data.sapuser == "1" %}
         <tr>
             <td>SAP Login erledigt</td>
             <td><input class="grau" onclick="return false;" type="checkbox"
                     name="checksapuser" id="checksapuser" value="1" {% if
                     data.checksapuser =="1" %} checked {% endif %}></td>
         </tr>
+        {% endif %}
         <tr>
             <td>Drucker erledigt</td>
             <td><input class="grau" onclick="return false;" type="checkbox"

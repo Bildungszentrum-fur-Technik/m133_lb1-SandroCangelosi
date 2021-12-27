@@ -10,6 +10,5 @@ Das HR erstellt den Eintritt, die IT führt die Checkliste nach und der Vorgeset
 ...
 
 ## Todo Liste
-* Session für die Authentifikation
+* Session für die Authentifikation (Anzeige im Header)
 * (optional) Sortierbare Liste
-* (optional) Checkliste anpassen
