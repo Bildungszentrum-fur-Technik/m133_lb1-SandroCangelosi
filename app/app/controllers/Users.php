@@ -14,12 +14,12 @@ class Users extends Controller
         // Dürfen wir überhaupt diese Funktion nutzen? 
         if (!isset($_SESSION['user_id'])) {
             // Kein Login, Keine Bestellungen -> möglich wäre auch eine Weiterleitung auf Login
-            redirect('Home/index');
+            redirect('home/index');
         } else {
 
             if (!in_array("admin", $_SESSION['user_roles'])) {
                 // Wir sind eingeloggt, aber nicht Admin: Weg von hier
-                redirect('Orders/listmyorders');
+                redirect('home/index');
             }
         }
 
@@ -39,7 +39,7 @@ class Users extends Controller
         // Kein Register für User die bereits eingeloggt sind
         if (isset($_SESSION['user_id'])) {
 
-            redirect('Orders/listmyorders');
+            redirect('home/index');
         }
 
         $userModel = $this->model('UserModel');
@@ -146,10 +146,10 @@ class Users extends Controller
         // Kein Login für User die bereits eingeloggt sind
         if (isset($_SESSION['user_id'])) {
 
-            redirect('Orders/listmyorders');
-        }
-
-        $userModel = $this->model('UserModel');
+            $bereitseingeloggt = true;
+            echo $this->twig->render('home/index.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'bereitseingeloggt' => $bereitseingeloggt]);
+        }else{
+            $userModel = $this->model('UserModel');
 
         // Check for post or get
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -218,6 +218,9 @@ class Users extends Controller
 
             echo $this->twig->render('user/login.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'data' => $data]);
         }
+        }
+
+        
     }
 
 
@@ -233,7 +236,7 @@ class Users extends Controller
         // Keine Usersession für User die bereits eingeloggt sind
         if (isset($_SESSION['user_id'])) {
 
-            redirect('Orders/listmyorders');
+            redirect('home/index');
         }
 
         // Der JSON-Inhalt aus MySQL kommt etwas komisch daher...Array machen und später in der Session speichern
@@ -244,7 +247,7 @@ class Users extends Controller
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_roles'] = $rolesarray;
         
-        redirect('Orders/listmyorders');
+        redirect('home/index');
     }
 
     /**
@@ -257,14 +260,14 @@ class Users extends Controller
         // Kein Logout für User die nicht eingeloggt sind
         if (!isset($_SESSION['user_id'])) {
 
-            redirect('Orders/listmyorders');
+            redirect('home/index');
         }
 
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_name']);
         session_destroy();
-        redirect('Orders/index');
+        redirect('home/index');
     }
 
     /**

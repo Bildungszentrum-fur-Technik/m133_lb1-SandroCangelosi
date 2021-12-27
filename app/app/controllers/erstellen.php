@@ -4,6 +4,23 @@ class Erstellen extends Controller
 {
     public function index($name = '')
     {
+        // Haben wir die entsprechenden Berechtigungen?
+        if (!isset($_SESSION['user_id'])) {
+            // Kein Login, Keine Bestellungen -> möglich wäre auch eine Weiterleitung auf Login
+
+            $nichteingeloggt = true;
+            echo $this->twig->render('user/login.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'nichteingeloggt' => $nichteingeloggt]);
+        
+        } else {
+
+            if (!in_array("hr", $_SESSION['user_roles'])) {
+                // Wir sind zwar eingeloggt, sind aber nicht berechtigit
+                $keineberechtigung = true;
+                echo $this->twig->render('home/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'keineberechtigung' => $keineberechtigung]);
+            
+            } else{
+            // Wir sind berechtigt
+
         // Wenn der Aufruf ein POST Request ist, wird dieses if ausgeführt.
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -244,5 +261,8 @@ class Erstellen extends Controller
             // Bei einem GET Aufruf wird die "erstellen" View standartmässig mit einem Webseitentitel gelanden.
             echo $this->twig->render('erstellen/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'data' => $data]);
         }
+            }
+        }
+
     }
 }
