@@ -9,28 +9,36 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto abstand">
         <li class="nav-item active">
+          {% if session.user_roles[0] == 'hr' or session.user_roles[1] == 'hr' or session.user_roles[2] == 'hr' %}
           <a class="nav-link" href="/erstellen/">Eintritt erstellen</a>
+          {% endif %}
         </li>
         <li class="nav-item active">
+          {% if session.user_roles[0] == 'it' or session.user_roles[1] == 'it' or session.user_roles[2] == 'it' %}
           <a class="nav-link" href="/listeit/">Übersicht Eintritte IT</a>
+          {% endif %}
         </li>
         <li class="nav-item active">
+          {% if session.user_roles[0] == 'vorgesetzter' or session.user_roles[1] == 'vorgesetzter' or session.user_roles[2] == 'vorgesetzter'%}
           <a class="nav-link" href="/listevorgesetzter/">Übersicht Eintritte Vorgesetzter</a>
+          {% endif %}
         </li>
+        {% if session.user_id is defined %}
         <li class="nav-item active">
           <a class="nav-link" href="/liste/">Eintrittsliste</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/test/">Test</a>
-        </li>        
+        </li>     
+        {% endif %}
       </ul>
       <ul class="navbar-nav ml-auto abstandrechts">
-        <li class="nav-item active">
-          <a class="nav-link active" href="/Users/logout">Abmelden</a>
-        </li>
+        {% if not session.user_id is defined %}
         <li class="nav-item active">
           <a class="nav-link active" href="/Users/login">Login</a>
         </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link active" href="/Users/logout">Abmelden</a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </nav>
