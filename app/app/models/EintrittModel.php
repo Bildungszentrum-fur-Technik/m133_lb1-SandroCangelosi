@@ -5,7 +5,7 @@ class EintrittModel extends BaseModel
     // Liste für den Administrator
     public function getAdminList()
     {
-        // SQL Befehl mit Variablen welche von unten befüllt werden
+        // SQL Befehl welcher alle Eintritte auflistet, die für den Administrator sind.
         $this->db->query("SELECT * FROM usereintritt");
         $results = $this->db->resultSet();
 
@@ -15,7 +15,7 @@ class EintrittModel extends BaseModel
     // Liste für die IT
     public function getBearbeitenList()
     {
-        // SQL Befehl mit Variablen welche von unten befüllt werden
+        // SQL Befehl welcher alle Eintritte auflistet, die für die IT sind.
         $this->db->query("SELECT * FROM `usereintritt` WHERE `eintrittstatus` = '1'");
         $results = $this->db->resultSet();
 
@@ -25,14 +25,14 @@ class EintrittModel extends BaseModel
     // Liste für den Vorgesetzen
     public function getVorgesetzterList()
     {
-        // SQL Befehl mit Variablen welche von unten befüllt werden
+        // SQL Befehl welcher alle Eintritte auflistet, die für die Vorgesetzen sind.
         $this->db->query("SELECT * FROM `usereintritt` WHERE `eintrittstatus` = '2'");
         $results = $this->db->resultSet();
 
         return $results;
     }
 
-    // Holt sich einen einzelnen Datensazu mit der Personalnummer
+    // Holt sich einen einzelnen Datensatz mit der Personalnummer
     public function getEinzelnerDatensatz($persnr)
     {
         // SQL Befehl mit Variablen welche von unten befüllt werden

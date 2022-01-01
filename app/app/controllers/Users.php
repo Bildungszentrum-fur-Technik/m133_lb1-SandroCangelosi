@@ -148,79 +148,77 @@ class Users extends Controller
 
             $bereitseingeloggt = true;
             echo $this->twig->render('home/index.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'bereitseingeloggt' => $bereitseingeloggt]);
-        }else{
+        } else {
             $userModel = $this->model('UserModel');
 
-        // Check for post or get
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Process Form
+            // Check for post or get
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Process Form
 
-            // Zuerst einmal den Array "Sanitizen" <- Sind es wirklich Strings??
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-
-            // Init Data <- Damit Daten nicht wieder neu eingegeben werden müssen
-            $data = [
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'email_err' => '', // Error für Attribut
-                'password_err' => '', // Error für Attribut
-            ];
-
-            // Validating
-
-            if (empty($data['email'])) {
-                $data['email_err'] = 'Bitte Email angeben';
-            }
+                // Zuerst einmal den Array "Sanitizen" <- Sind es wirklich Strings??
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 
-            if (empty($data['password'])) {
-                $data['password_err'] = 'Bitte Passwort angeben';
-            }
+                // Init Data <- Damit Daten nicht wieder neu eingegeben werden müssen
+                $data = [
+                    'email' => trim($_POST['email']),
+                    'password' => trim($_POST['password']),
+                    'email_err' => '', // Error für Attribut
+                    'password_err' => '', // Error für Attribut
+                ];
 
-            // Email/Password checken
-            if ($userModel->getUserForEmail($data['email'])) {
-                // Benutzer gefunden
+                // Validating
 
-            } else {
-                $data['email_err'] = 'Kein Benutzer gefunden';
-            }
+                if (empty($data['email'])) {
+                    $data['email_err'] = 'Bitte Email angeben';
+                }
 
 
-            // Keine Errors vorhanden
-            if (empty($data['email_err']) && empty($data['password_err'])) {
+                if (empty($data['password'])) {
+                    $data['password_err'] = 'Bitte Passwort angeben';
+                }
 
-                // Passwort überprüfen
-                $loggedInBenutzer = $userModel->login($data['email'], $data['password']);
+                // Email/Password checken
+                if ($userModel->getUserForEmail($data['email'])) {
+                    // Benutzer gefunden
 
-                //die(var_dump($loggedInBenutzer));
-
-                if ($loggedInBenutzer) {
-                    // Session erstellen
-                    $this->createUserSession($loggedInBenutzer);
                 } else {
-                    $data['password_err'] = 'Passwort/Benutzername falsch';
+                    $data['email_err'] = 'Kein Benutzer gefunden';
+                }
+
+
+                // Keine Errors vorhanden
+                if (empty($data['email_err']) && empty($data['password_err'])) {
+
+                    // Passwort überprüfen
+                    $loggedInBenutzer = $userModel->login($data['email'], $data['password']);
+
+                    //die(var_dump($loggedInBenutzer));
+
+                    if ($loggedInBenutzer) {
+                        // Session erstellen
+                        $this->createUserSession($loggedInBenutzer);
+                    } else {
+                        $data['password_err'] = 'Passwort/Benutzername falsch';
+                        echo $this->twig->render('user/login.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'data' => $data]);
+                    }
+                } else {
+
+                    // View laden mit Fehlern
                     echo $this->twig->render('user/login.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'data' => $data]);
                 }
             } else {
+                // Init Data <- Damit Daten nicht wieder neu eingegeben werden müssen
+                $data = [
+                    'email' => '',
+                    'password' => '',
+                    'email_err' => '', // Error für Attribut
+                    'password_err' => '', // Error für Attribut
+                ];
 
-                // View laden mit Fehlern
                 echo $this->twig->render('user/login.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'data' => $data]);
             }
-        } else {
-            // Init Data <- Damit Daten nicht wieder neu eingegeben werden müssen
-            $data = [
-                'email' => '',
-                'password' => '',
-                'email_err' => '', // Error für Attribut
-                'password_err' => '', // Error für Attribut
-            ];
-
-            echo $this->twig->render('user/login.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'data' => $data]);
         }
-        }
-
-        
     }
 
 
@@ -246,7 +244,7 @@ class Users extends Controller
         $_SESSION['user_email'] = $user['email'];
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_roles'] = $rolesarray;
-        
+
         redirect('home/index');
     }
 
@@ -268,19 +266,5 @@ class Users extends Controller
         unset($_SESSION['user_name']);
         session_destroy();
         redirect('home/index');
-    }
-
-    /**
-     * isLoggedIn - Helper-Funktion. Ist ein User eingeloggt.
-     *
-     * @return void
-     */
-    public function isLoggedIn()
-    {
-        if (isset($_SESSION['user_id'])) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

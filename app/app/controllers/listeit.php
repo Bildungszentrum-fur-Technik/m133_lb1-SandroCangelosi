@@ -4,16 +4,18 @@ class Listeit extends Controller
 {
     public function index($name = '')
     {
-        // Haben wir die entsprechenden Berechtigungen?
+        // Wird ausgeführt, wenn keiner angemeldet ist
         if (!isset($_SESSION['user_id'])) {
-            // Kein Login, Keine Bestellungen -> möglich wäre auch eine Weiterleitung auf Login
 
+            // Variable wird auf true gesetzt, damit das Popup Fenster angezeigt wird.
             $nichteingeloggt = true;
             echo $this->twig->render('user/login.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'nichteingeloggt' => $nichteingeloggt]);
         } else {
 
+            // Haben wir keine Berechtigung?
             if (!in_array("it", $_SESSION['user_roles'])) {
-                // Wir sind zwar eingeloggt, sind aber nicht berechtigit
+
+                // Variable wird auf true gesetzt, damit das Popup Fenster angezeigt wird.
                 $keineberechtigung = true;
                 echo $this->twig->render('home/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'keineberechtigung' => $keineberechtigung]);
             } else {
@@ -38,8 +40,7 @@ class Listeit extends Controller
                     echo $this->twig->render('bearbeiten/index.twig.html', ['title' => "Eintritt bearbeiten", 'urlroot' => URLROOT, 'data' => $listearrayob1]);
                 } else {
 
-                    /* Rendert standarmässig die Liste für die IT (View: "listeit"). Mit einem Webseitentitel und mit Fakedaten. 
-                    Wenn auf den Header geklickt wird, wird die Liste angezeigt.*/
+                    // Rendert standarmässig die Liste für die IT (View: "listeit") und der Webseitentitel wird auch übergeben. Wenn auf den Header geklickt wird, wird die Liste angezeigt.
                     echo $this->twig->render('listeit/index.twig.html', ['title' => "Übersicht Eintritte IT", 'urlroot' => URLROOT, 'data' => $listearray]);
                 }
             }

@@ -4,16 +4,20 @@ class Bearbeiten extends Controller
 {
     public function index($name = '')
     {
-        // Haben wir die entsprechenden Berechtigungen?
+        // Wird ausgeführt, wenn keiner angemeldet ist
         if (!isset($_SESSION['user_id'])) {
             // Kein Login, Keine Bestellungen -> möglich wäre auch eine Weiterleitung auf Login
 
+            // Variable wird auf true gesetzt, damit das Popup Fenster angezeigt wird.
             $nichteingeloggt = true;
             echo $this->twig->render('user/login.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'nichteingeloggt' => $nichteingeloggt]);
         } else {
+            // Angemeldet
 
+            // Haben wir keine Berechtigung?
             if (!in_array("it", $_SESSION['user_roles'])) {
-                // Wir sind zwar eingeloggt, sind aber nicht berechtigit
+
+                // Variable wird auf true gesetzt, damit das Popup Fenster angezeigt wird.
                 $keineberechtigung = true;
                 echo $this->twig->render('home/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'keineberechtigung' => $keineberechtigung]);
             } else {
@@ -62,7 +66,7 @@ class Bearbeiten extends Controller
                         // Führt den Update aus
                         $errormessage = $liste->getUpdateDBchecks($uebgergebenepersonalnummer, $checkneuerlaptop, $checkneueshandy, $checkneuestelefon, $checkwinuser, $checksapuser, $checkdrucker, $bemerkungenit);
 
-                        // Holt sich die Lsite des Bearbeiters
+                        // Holt sich die Liste des Bearbeiters
                         $data = $liste->getBearbeitenList();
 
                         // Falls es keinen Fehler gegeben hat wird der obere Code ausgeführt. Eine Fehler oder erfolgreiche Meldung wird erscheinen

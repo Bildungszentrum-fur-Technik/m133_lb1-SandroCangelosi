@@ -4,19 +4,23 @@ class Abschliessen extends Controller
 {
     public function index($name = '')
     {
-        // Haben wir die entsprechenden Berechtigungen?
+        // Wird ausgeführt, wenn keiner angemeldet ist
         if (!isset($_SESSION['user_id'])) {
-            // Kein Login, Keine Bestellungen -> möglich wäre auch eine Weiterleitung auf Login
 
+            // Variable wird auf true gesetzt, damit das Popup Fenster angezeigt wird.
             $nichteingeloggt = true;
             echo $this->twig->render('user/login.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'nichteingeloggt' => $nichteingeloggt]);
         } else {
+            // Eingeloggt
 
+            // Haben wir keine Berechtgung?
             if (!in_array("vorgesetzter", $_SESSION['user_roles'])) {
-                // Wir sind zwar eingeloggt, sind aber nicht berechtigit
+
+                // Variable wird auf true gesetzt, damit das Popup Fenster angezeigt wird.
                 $keineberechtigung = true;
                 echo $this->twig->render('home/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'keineberechtigung' => $keineberechtigung]);
             } else {
+                // Wir sind berechtigt
 
                 // Falls der Aufruf auf die Webseite einen POST Request wäre, würde der untere Code ausgeführt werden.
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -45,7 +49,7 @@ class Abschliessen extends Controller
                         }
                     } else {
 
-                        // Die Personalnummer wird hire über den Button übergeben
+                        // Die Personalnummer wird hier über den Button übergeben
                         $uebgergebenepersonalnummer2 = $_POST['abschliessen'];
 
                         // Holt sich den einzelnen Datensatz mithilfe der Personalnummer
@@ -101,7 +105,7 @@ class Abschliessen extends Controller
 
                         ];
 
-                        // Rendert die View "abschliessen" mit einem Seitentitel und den obenere Fake Daten.
+                        // Rendert die View "abschliessen" mit einem Seitentitel.
                         echo $this->twig->render('abschliessen/index.twig.html', ['title' => "Eintritt abschliessen", 'urlroot' => URLROOT, 'data' => $data]);
                     }
                 } else {

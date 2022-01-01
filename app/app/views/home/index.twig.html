@@ -4,23 +4,24 @@
 <!-- Home Seite -->
 <head>
 </head>
+<!-- Popup Fenster, falls man keine Berechtigung hat -->
 {% if keineberechtigung == true %}
 <div class="alert alert-danger platz3" role="alert">
-    Du hast keine Berechtigung
-  </div>
+  Du hast keine Berechtigung
+</div>
 {% endif %}
 
+<!-- Popup Fenster, falls man bereits eingeloggt ist -->
 {% if bereitseingeloggt == true %}
 <div class="alert alert-danger platz3" role="alert">
-    Du bist bereits mit einem Benutzer eingeloggt
-  </div>
+  Du bist bereits mit einem Benutzer eingeloggt
+</div>
 {% endif %}
 
 <h1 class="mt-5">User Eintritt</h1>
 <p class="lead">Ein Projekt in dem das HR einen User Eintritt erstellen kann.
-    Welche dann diesen Eintritt zur IT weiterleiten, die dann die Checkliste
-    nachführen. Der Vorgesetzte schliess dann zum Schluss den Eintritt ab.
-    
+  Welche dann diesen Eintritt zur IT weiterleiten, die dann die Checkliste
+  nachführen. Der Vorgesetzte schliess dann zum Schluss den Eintritt ab.
 </p>
 
 {% endblock %}

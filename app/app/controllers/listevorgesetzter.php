@@ -4,25 +4,25 @@ class Listevorgesetzter extends Controller
 {
     public function index($name = '')
     {
-        // Haben wir die entsprechenden Berechtigungen?
+        // Wird ausgeführt, wenn keiner angemeldet ist
         if (!isset($_SESSION['user_id'])) {
-            // Kein Login, Keine Bestellungen -> möglich wäre auch eine Weiterleitung auf Login
 
+            // Variable wird auf true gesetzt, damit das Popup Fenster angezeigt wird.
             $nichteingeloggt = true;
             echo $this->twig->render('user/login.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'nichteingeloggt' => $nichteingeloggt]);
         } else {
 
+            // Haben wir keine Berechtigung?
             if (!in_array("vorgesetzter", $_SESSION['user_roles'])) {
-                // Wir sind zwar eingeloggt, sind aber nicht berechtigit
+
+                // Variable wird auf true gesetzt, damit das Popup Fenster angezeigt wird.
                 $keineberechtigung = true;
                 echo $this->twig->render('home/index.twig.html', ['title' => "Eintritt erstellen", 'urlroot' => URLROOT, 'keineberechtigung' => $keineberechtigung]);
             } else {
+
                 // Holt sich vin dem EIntrittModel den einzelnen Datensatz. Wird unten für beide ifs verwendet.
                 $liste = $this->model('EintrittModel');
                 $listearray = $liste->getVorgesetzterList();
-
-                // Kürtzt den Array, damit die Werte ausgelesen werden können.
-                $listekurz = $listearray[0];
 
                 // Falls der Button mit dem Name "loeschen" von der View "listevorgesetzter" gedrückt wird, dann wird der untere Code ausgeführt.
                 if (isset($_POST['loeschen'])) {

@@ -22,11 +22,9 @@ class UserModel extends BaseModel
         $row = $this->db->single();
         $hashed_pass = $row['password'];
 
-        if (password_verify($password, $hashed_pass))
-        {
+        if (password_verify($password, $hashed_pass)) {
             return $row;
-        } else 
-        {
+        } else {
             return false;
         }
     }
@@ -54,14 +52,11 @@ class UserModel extends BaseModel
         $this->db->bind(':password', $data['password']);
         $this->db->bind(':json', $json);
 
-        if ($this->db->execute())
-        {
+        if ($this->db->execute()) {
             return true;
-        } else 
-        {
+        } else {
             return false;
         }
-
     }
 
     /**
@@ -92,7 +87,7 @@ class UserModel extends BaseModel
         return $row;
     }
 
-    
+
     /**
      * checkUserForEmail - Wichtige Hilfsfunktion für Registrierung. Ziel: Gucken ob bereits eine Email besetzt ist.
      *
@@ -107,78 +102,10 @@ class UserModel extends BaseModel
 
         $row = $this->db->single();
 
-        if ($this->db->rowCount() > 0)
-        {
+        if ($this->db->rowCount() > 0) {
             return true;
         } else {
             return false;
         }
     }
-
-    /**
-     * getUsersForRole - Hilfsfunktion: User listen mit einer bestimmten Rolle
-     *
-     * @param  mixed $role - String
-     *
-     * @return $results - Resultset
-     */
-    public function getUsersForRole($role)
-    {
-
-        $obj = [$role];
-        $json = json_encode($obj);
-
-        $this->db->query("SELECT * FROM users WHERE JSON_CONTAINS(roles, :json);");
-        $this->db->bind(':json', $json);
-        $results = $this->db->resultSet();
-
-        return $results;
-    }
-
-    
-    /**
-     * getUserForID - Liste aller Benutzer mit einer bestimmten Email, nur eine Antwort
-     *
-     * @param  mixed $userid 
-     *
-     * @return $row - DataRow
-     */
-    public function getUserForID($userid)
-    {
-        $this->db->query("SELECT * FROM users WHERE id = :id");
-        $this->db->bind(':id', $userid);
-
-        $row = $this->db->single();
-
-        return $row;
-    }
-
-    /**
-     * getFakeUserForIDNormal - Fakemethode
-     *
-     * @return void
-     */
-    public function getFakeUserForIDNormal()
-    {
-        $data = [
-            ['id' => '1','name' => 'Testuser Testnachname','email' => 'test@test.ch','roles' => '[{"role":"user"}]']
-        ];
-
-        return $data;
-    }
-
-    /**
-     * getFakeUserForIDAdmin - FakeMethode
-     *
-     * @return void
-     */
-    public function getFakeUserForIDAdmin()
-    {
-        $data = [
-            ['id' => '2','name' => 'AdminTestuser AdminTestnachname','email' => 'admintest@test.ch','roles' => '[{"role":"admin"}]']
-        ];
-
-        return $data;
-    }
-
 }
