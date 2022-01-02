@@ -39,100 +39,102 @@ class Users extends Controller
         // Kein Register für User die bereits eingeloggt sind
         if (isset($_SESSION['user_id'])) {
 
-            redirect('home/index');
-        }
+            // Variable wird gesetzt, damit die Fehlermeldung erscheint
+            $bereitseingeloggt = true;
+            echo $this->twig->render('home/index.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'bereitseingeloggt' => $bereitseingeloggt]);
+        } else {
+            $userModel = $this->model('UserModel');
 
-        $userModel = $this->model('UserModel');
-
-        // Check for post or get
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Process Form
-
-
-            // Zuerst einmal den Array "Sanitizen" <- Sind es wirklich Strings??
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            // Check for post or get
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Process Form
 
 
-            // Init Data <- Damit Daten nicht wieder neu eingegeben werden müssen
-            $data = [
-                'name' => trim($_POST['name']),
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'confirm_password' => trim($_POST['confirm_password']),
-                'name_err' => '', // Error für Attribut
-                'email_err' => '', // Error für Attribut
-                'password_err' => '', // Error für Attribut
-                'confirm_password_err' => '' // Error für Attribut
-            ];
+                // Zuerst einmal den Array "Sanitizen" <- Sind es wirklich Strings??
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 
-            // Validierung der Daten
-
-            /**
-             * TODO: Es fehlt noch die Validierung auf:
-             * 
-             * Komplexitätsrichtlinien für Passwörter
-             */
-
-            if (empty($data['name'])) {
-                $data['name_err'] = 'Bitte Name angeben';
-            }
-
-            if (empty($data['email'])) {
-                $data['email_err'] = 'Bitte Email angeben';
-            } else {
-                // Email checken
-                if ($userModel->checkUserForEmail($data['email'])) {
-                    $data['email_err'] = 'Email schon verwendet';
-                }
-            }
-
-            if (empty($data['password'])) {
-                $data['password_err'] = 'Bitte Passwort angeben';
-            } else if (strlen($data['password']) < 6) {
-                $data['password_err'] = 'Passwort muss mind. 6 Zeichen beinhalten';
-            }
-
-            if (empty($data['confirm_password'])) {
-                $data['confirm_password_err'] = 'Bitte Bestätigungs-Passwort angeben';
-            } else if ($data['confirm_password'] != $data['password']) {
-                $data['confirm_password_err'] = 'Das Bestätigungspasswort muss mit dem Passwort übereinstimmen';
-            }
-
-            // Keine Errors vorhanden
-            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
-                // Alles gut -> Passwort hashen
-                $options = [
-                    'cost' => 12,
+                // Init Data <- Damit Daten nicht wieder neu eingegeben werden müssen
+                $data = [
+                    'name' => trim($_POST['name']),
+                    'email' => trim($_POST['email']),
+                    'password' => trim($_POST['password']),
+                    'confirm_password' => trim($_POST['confirm_password']),
+                    'name_err' => '', // Error für Attribut
+                    'email_err' => '', // Error für Attribut
+                    'password_err' => '', // Error für Attribut
+                    'confirm_password_err' => '' // Error für Attribut
                 ];
-                $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
-                //die($data['password']);
 
-                // Register User
-                if ($userModel->registerUser($data)) {
-                    redirect('Users/login');
+
+                // Validierung der Daten
+
+                /**
+                 * TODO: Es fehlt noch die Validierung auf:
+                 * 
+                 * Komplexitätsrichtlinien für Passwörter
+                 */
+
+                if (empty($data['name'])) {
+                    $data['name_err'] = 'Bitte Name angeben';
+                }
+
+                if (empty($data['email'])) {
+                    $data['email_err'] = 'Bitte Email angeben';
                 } else {
-                    die('Schlimm');
+                    // Email checken
+                    if ($userModel->checkUserForEmail($data['email'])) {
+                        $data['email_err'] = 'Email schon verwendet';
+                    }
+                }
+
+                if (empty($data['password'])) {
+                    $data['password_err'] = 'Bitte Passwort angeben';
+                } else if (strlen($data['password']) < 6) {
+                    $data['password_err'] = 'Passwort muss mind. 6 Zeichen beinhalten';
+                }
+
+                if (empty($data['confirm_password'])) {
+                    $data['confirm_password_err'] = 'Bitte Bestätigungs-Passwort angeben';
+                } else if ($data['confirm_password'] != $data['password']) {
+                    $data['confirm_password_err'] = 'Das Bestätigungspasswort muss mit dem Passwort übereinstimmen';
+                }
+
+                // Keine Errors vorhanden
+                if (empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
+                    // Alles gut -> Passwort hashen
+                    $options = [
+                        'cost' => 12,
+                    ];
+                    $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
+                    //die($data['password']);
+
+                    // Register User
+                    if ($userModel->registerUser($data)) {
+                        redirect('Users/login');
+                    } else {
+                        die('Schlimm');
+                    }
+                } else {
+
+                    // View laden mit Fehlern
+                    echo $this->twig->render('user/register.twig.html', ['title' => "User / Register", 'urlroot' => URLROOT, 'data' => $data]);
                 }
             } else {
+                // Init Data <- Damit Daten nicht wieder neu eingegeben werden müssen
+                $data = [
+                    'name' => '',
+                    'email' => '',
+                    'password' => '',
+                    'confirm_password' => '',
+                    'name_err' => '', // Error für Attribut
+                    'email_err' => '', // Error für Attribut
+                    'password_err' => '', // Error für Attribut
+                    'confirm_password_err' => '' // Error für Attribut
+                ];
 
-                // View laden mit Fehlern
                 echo $this->twig->render('user/register.twig.html', ['title' => "User / Register", 'urlroot' => URLROOT, 'data' => $data]);
             }
-        } else {
-            // Init Data <- Damit Daten nicht wieder neu eingegeben werden müssen
-            $data = [
-                'name' => '',
-                'email' => '',
-                'password' => '',
-                'confirm_password' => '',
-                'name_err' => '', // Error für Attribut
-                'email_err' => '', // Error für Attribut
-                'password_err' => '', // Error für Attribut
-                'confirm_password_err' => '' // Error für Attribut
-            ];
-
-            echo $this->twig->render('user/register.twig.html', ['title' => "User / Register", 'urlroot' => URLROOT, 'data' => $data]);
         }
     }
 
@@ -146,6 +148,7 @@ class Users extends Controller
         // Kein Login für User die bereits eingeloggt sind
         if (isset($_SESSION['user_id'])) {
 
+            // Variable wird gesetzt, damit die Fehlermeldung erscheint
             $bereitseingeloggt = true;
             echo $this->twig->render('home/index.twig.html', ['title' => "User / Login", 'urlroot' => URLROOT, 'bereitseingeloggt' => $bereitseingeloggt]);
         } else {
